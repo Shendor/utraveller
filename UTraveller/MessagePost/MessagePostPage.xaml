@@ -1,0 +1,41 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UTraveller.MessagePost.MessagePostPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" 
+    shell:SystemTray.IsVisible="False">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </phone:PhoneApplicationPage.Resources>
+    
+    <Grid Background="{Binding BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Margin="0,20,0,20">
+            <TextBox VerticalAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}"
+                 Text="{Binding Message, Mode=TwoWay}" Margin="10" 
+                     Foreground="{Binding TextColor}"/>
+        </ScrollViewer>
+        <Button Grid.Row="1" Style="{StaticResource SmallEllipseButton}"
+                Command="{Binding PostMessageCommand}">
+            <ImageBrush ImageSource="/Assets/Icons/message3.png"/>
+        </Button>
+    </Grid>
+
+</phone:PhoneApplicationPage>

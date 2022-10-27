@@ -1,0 +1,123 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d">
+
+    <Style x:Key="InternalToolkitControlButtonStyle" TargetType="Button">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Height" Value="55" />
+        <Setter Property="MaxHeight" Value="55"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <ContentControl HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Stretch"
+                                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,5,10,5">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="content">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding MainColor}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="content">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0.4"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border Name="content" Background="Transparent" BorderBrush="{Binding MainColor}" BorderThickness="2"
+                                Padding="2" HorizontalAlignment="Stretch">
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ContentControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="toolkit:DatePicker">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="ValueStringFormat" Value="{}{0:d}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toolkit:DatePicker">
+                    <StackPanel>
+                        <ContentControl
+                                    Content="{TemplateBinding Header}"
+                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    Foreground="{Binding TextColor}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    Margin="12,0,12,-4"/>
+                        <Button x:Name="DateTimeButton"
+                                Content="{TemplateBinding ValueString}"
+                                FontFamily="{TemplateBinding FontFamily}"
+                                Foreground="{Binding TextColor}"
+                                Style="{StaticResource InternalToolkitControlButtonStyle}"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="toolkit:TimePicker">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toolkit:TimePicker">
+                    <StackPanel>
+                        <ContentControl
+                                    Content="{TemplateBinding Header}"
+                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    Foreground="{Binding TextColor}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    Margin="12,0,12,-4"/>
+                        <Button x:Name="DateTimeButton"
+                                Content="{TemplateBinding ValueString}"
+                                FontFamily="{TemplateBinding FontFamily}"
+                                Foreground="{Binding TextColor}"
+                                Style="{StaticResource InternalToolkitControlButtonStyle}"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="toolkit:PickerBox">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toolkit:PickerBox">
+                    <StackPanel>
+                        <ContentControl
+                                    Content="{TemplateBinding Header}"
+                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    Foreground="{Binding TextColor}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    Margin="12,0,12,-4"/>
+                        <Button  x:Name="Button"
+                                 Content="{TemplateBinding SelectedItem}"
+                                 FontFamily="{TemplateBinding FontFamily}"
+                                 Foreground="{Binding TextColor}"
+                                 HorizontalContentAlignment="Left"
+                                 Style="{StaticResource InternalToolkitControlButtonStyle}"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,135 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UTraveller.Help.HelpPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <phone:PhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </phone:PhoneApplicationPage.Resources>
+
+    <toolkit:FlipView Foreground="{Binding TextColor}"  Background="{Binding BackgroundColor}">
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/1.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/2.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/3.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/4.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/5.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/6.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/7.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/8.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/9.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/10.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/11.jpg" />
+           
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/12.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <ScrollViewer>
+                <StackPanel>
+                    <Image Source="/Assets/Images/Help/13.jpg" />
+                    <RichTextBox>
+                        <Paragraph >
+                            <Run TextDecorations="Underline" FontWeight="Bold">1) Set geo-position of photos</Run>
+                            <Run>- Choose 'Edit' on the menu below and hold your finger on the map where you'ld like to put the photos. When a pushpin is added, apply changes and hold your finger on the pushpin to open a context menu. Choose 'Add Photos' and select some photos you'ld like to add to this location.</Run>
+                        </Paragraph>
+                        <Paragraph >
+                            <Run TextDecorations="Underline" FontWeight="Bold">2) Edit geo-position of photos</Run>
+                            <Run>- if you don't know where's a position of a specific photo, open a list of photos using a toolbar on the top-left side of the screen and select a photo to find out its position. If it has position on the map its pushpin will be centered on the screen and highlighted. Choose 'Edit' on the menu below and tap a pushpin which you would like to change. It will be centered on the map so you can drag the map to change its position. Tap on this pushpin again to apply changes.</Run>
+                        </Paragraph>
+                        <Paragraph >
+                            <Run TextDecorations="Underline" FontWeight="Bold">3) Add routes</Run>
+                            <Run>- on the Map page choose 'Routes' from menu below. Tap on 'Device' or 'OneDrive' (you must be connected to your Microsoft Account to use OneDrive) button and choose a route you'ld like to add (the App supports only .kml and .kmz files).
+To create routes and export them to .kml or .kmz files you should use Google Maps Engine (https://mapsengine.google.com/maps). The App can import polygons, pushpins and routes as well preserving all text captions attached to these objects.</Run>
+                        </Paragraph>
+                    </RichTextBox>
+                </StackPanel>
+            </ScrollViewer>
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/14.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/15.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/16.jpg" />
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <ScrollViewer>
+                <StackPanel>
+                    <Image Source="/Assets/Images/Help/17.jpg" />
+                    <RichTextBox>
+                        <Paragraph >
+                            <Run TextDecorations="Underline" FontWeight="Bold">1) Link you profile to social networks</Run>
+                            <Run>- you can connect to your Microsoft or Facebook account. Microsoft account is used to connect to OneDrive storage and get access to routes files (see p.14 of 'Basic features' for details). Facebook account is used for several things: post photos and messages. Write comments to your posts. View comments and likes of your posts. Save photos on a private album created by the App to get access them remotely (this is optional feature but if it's switched off your photos will not be saved on our Cloud and will be marked as unsynchronized, but if you switch it on, it's possible to sync your photos again to save them both on our Cloud (only direct URL from Facebook private album) and on private facebook album. It can be changed in future App release so you can save your photos completely on our Cloud without having Facebook account or connection to Facebook account)</Run>
+                        </Paragraph>
+                    </RichTextBox>
+                </StackPanel>
+            </ScrollViewer>
+        
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Image Source="/Assets/Images/Help/18.jpg" />
+        </toolkit:FlipViewItem>
+
+    </toolkit:FlipView>
+
+
+</phone:PhoneApplicationPage>

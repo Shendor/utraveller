@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ResourceFlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+    <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
+  </data>
+  <data name="ResourceLanguage" xml:space="preserve">
+    <value>en-US</value>
+    <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>uTraveler</value>
+  </data>
+  <data name="AppBarButtonText" xml:space="preserve">
+    <value>add</value>
+  </data>
+  <data name="AppBarMenuItemText" xml:space="preserve">
+    <value>Menu Item</value>
+  </data>
+  <data name="Spendings_Button" xml:space="preserve">
+    <value>Spendings</value>
+  </data>
+  <data name="Spendings_Field_Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Spendings_Field_Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Spendings_Field_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Spendings_Field_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Spendings_Category_Camping" xml:space="preserve">
+    <value>Camping</value>
+  </data>
+  <data name="Spendings_Category_Club" xml:space="preserve">
+    <value>Club</value>
+  </data>
+  <data name="Spendings_Category_Concert" xml:space="preserve">
+    <value>Concert</value>
+  </data>
+  <data name="Spendings_Category_Entertainment" xml:space="preserve">
+    <value>Entertainment</value>
+  </data>
+  <data name="Spendings_Category_FastFood" xml:space="preserve">
+    <value>FastFood</value>
+  </data>
+  <data name="Spendings_Category_Fine" xml:space="preserve">
+    <value>Fine</value>
+  </data>
+  <data name="Spendings_Category_Fuel" xml:space="preserve">
+    <value>Fuel</value>
+  </data>
+  <data name="Spendings_Category_Grocery" xml:space="preserve">
+    <value>Grocery</value>
+  </data>
+  <data name="Spendings_Category_Hotel" xml:space="preserve">
+    <value>Hotel</value>
+  </data>
+  <data name="Spendings_Category_House" xml:space="preserve">
+    <value>House</value>
+  </data>
+  <data name="Spendings_Category_Internet" xml:space="preserve">
+    <value>Internet</value>
+  </data>
+  <data name="Spendings_Category_Museum" xml:space="preserve">
+    <value>Museum</value>
+  </data>
+  <data name="Spendings_Category_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Spendings_Category_Parking" xml:space="preserve">
+    <value>Parking</value>
+  </data>
+  <data name="Spendings_Category_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Spendings_Category_Pub" xml:space="preserve">
+    <value>Pub</value>
+  </data>
+  <data name="Spendings_Category_PublicTransport" xml:space="preserve">
+    <value>Public transport</value>
+  </data>
+  <data name="Spendings_Category_Restaurant" xml:space="preserve">
+    <value>Restaurant</value>
+  </data>
+  <data name="Spendings_Category_Shopping" xml:space="preserve">
+    <value>Shopping</value>
+  </data>
+  <data name="Spendings_Category_Showplace" xml:space="preserve">
+    <value>Showplace</value>
+  </data>
+  <data name="Spendings_Category_Souvenir" xml:space="preserve">
+    <value>Souvenir</value>
+  </data>
+  <data name="Spendings_Category_TransportRent" xml:space="preserve">
+    <value>Transport rent</value>
+  </data>
+  <data name="Spendings_Currency_Euro" xml:space="preserve">
+    <value>Euro</value>
+  </data>
+  <data name="Spendings_Currency_HUForint" xml:space="preserve">
+    <value>Forint (Hungary)</value>
+  </data>
+  <data name="Spendings_Currency_MDLei" xml:space="preserve">
+    <value>Lei (Moldova)</value>
+  </data>
+  <data name="Spendings_Currency_ROLei" xml:space="preserve">
+    <value>Lei (Romania)</value>
+  </data>
+  <data name="Spendings_Currency_RURuble" xml:space="preserve">
+    <value>Ruble (Russia)</value>
+  </data>
+  <data name="Spendings_Currency_UAHryvnia" xml:space="preserve">
+    <value>Hryvnia (Ukraine)</value>
+  </data>
+  <data name="Spendings_Currency_UKPound" xml:space="preserve">
+    <value>Pound (UK)</value>
+  </data>
+  <data name="Spendings_Currency_USDollar" xml:space="preserve">
+    <value>Dollar (USA)</value>
+  </data>
+  <data name="Spendings_Field_Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Spendings_Header_Category" xml:space="preserve">
+    <value>Choose category</value>
+  </data>
+  <data name="Spendings_Header_Currency" xml:space="preserve">
+    <value>Choose currency</value>
+  </data>
+  <data name="EventDetails_AddPhoto_Button" xml:space="preserve">
+    <value>Add Photo</value>
+  </data>
+  <data name="EventDetails_Camera_Button" xml:space="preserve">
+    <value>Take Photo</value>
+  </data>
+  <data name="Message_Post_Button" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="Message_Update_Button" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Facebook_Privacy_ALL_FRIENDS" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="Facebook_Privacy_EVERYONE" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="Facebook_Privacy_SELF" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="Facebook_Post_Albums" xml:space="preserve">
+    <value>Albums</value>
+  </data>
+  <data name="Facebook_Post_Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Facebook_Post_Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="Common_Total" xml:space="preserve">
+    <value>Total:</value>
+  </data>
+  <data name="EventItem_MenuItem_SetCurrent" xml:space="preserve">
+    <value>Set as Current</value>
+  </data>
+  <data name="EventItem_MenuItem_UnsetCurrent" xml:space="preserve">
+    <value>Unset as Current</value>
+  </data>
+  <data name="Full_Date_Format" xml:space="preserve">
+    <value>dddd, d MMMM yyyy, HH:mm</value>
+  </data>
+  <data name="Short_No_Week_Name_Date_Format" xml:space="preserve">
+    <value>d MMMM yyyy, HH:mm</value>
+  </data>
+  <data name="Short_Dayly_Date_Format" xml:space="preserve">
+    <value>d MMMM yyyy</value>
+  </data>
+  <data name="Limit_Exceeded" xml:space="preserve">
+    <value>You have reached the limit for {0} and can't add more than {1}</value>
+  </data>
+  <data name="Sync_Limit_Exceeded" xml:space="preserve">
+    <value>Can't synchronize {0} because you have reached the limit and can't add more than {1}</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Trip</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="MoneySpendings" xml:space="preserve">
+    <value>Money Spendings</value>
+  </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Photo</value>
+  </data>
+  <data name="Route" xml:space="preserve">
+    <value>Route</value>
+  </data>
+  <data name="No_Connection_To_Sign_In" xml:space="preserve">
+    <value>You don't have internet connection to sign in :(</value>
+  </data>
+  <data name="SigningIn_User" xml:space="preserve">
+    <value>Signin in user...</value>
+  </data>
+  <data name="SignIn_Success" xml:space="preserve">
+    <value>You've been signed in successfully :)</value>
+  </data>
+  <data name="Wrong_Email_Or_Password" xml:space="preserve">
+    <value>Cannot sign in user. Wrong E-mail or Password :(</value>
+  </data>
+  <data name="SignIn_Unexpected_Error" xml:space="preserve">
+    <value>Cannot sign in user because of unexpected error. Please, try again later.</value>
+  </data>
+  <data name="No_Connection_To_SignUp" xml:space="preserve">
+    <value>You don't have internet connection to sign up :(</value>
+  </data>
+  <data name="SignUp_Email_Exist" xml:space="preserve">
+    <value>Sorry, this E-mail already exists :(</value>
+  </data>
+  <data name="SignUp_Fail" xml:space="preserve">
+    <value>Can't register user because of internal server error. Please, try again later.</value>
+  </data>
+  <data name="SignUp_Incorrect_Email" xml:space="preserve">
+    <value>E-mail must have more than 6 symbols</value>
+  </data>
+  <data name="SignUp_Incorrect_Password" xml:space="preserve">
+    <value>Password must have more than 3 symbols</value>
+  </data>
+  <data name="SignUp_Password_Not_Matched" xml:space="preserve">
+    <value>Passwords are not matched</value>
+  </data>
+  <data name="SignUp_Progress" xml:space="preserve">
+    <value>Signing up User with e-mail: {0}</value>
+  </data>
+  <data name="SignUp_Success" xml:space="preserve">
+    <value>User has been registered successfully and you can start using the App :)</value>
+  </data>
+  <data name="SignUp_Unexpected_Error" xml:space="preserve">
+    <value>Can't register an user. Error: '{0}' :(</value>
+  </data>
+  <data name="SignUp_Facebook_Get_Profile_Progress" xml:space="preserve">
+    <value>Getting your Facebook profile...</value>
+  </data>
+  <data name="EventDetails_Photo" xml:space="preserve">
+    <value>photo</value>
+  </data>
+  <data name="EventDetails_Photos" xml:space="preserve">
+    <value>photos</value>
+  </data>
+  <data name="PhotoCrop_Wrong_Extension" xml:space="preserve">
+    <value>Can't crop the image because it's not a JPEG file or has a bad format</value>
+  </data>
+  <data name="Sync_Fail" xml:space="preserve">
+    <value>Some items were not synchronized. Please, try again later :(</value>
+  </data>
+  <data name="Sync_Not_Connected" xml:space="preserve">
+    <value>You are not connected to the Cloud :(</value>
+  </data>
+  <data name="Sync_Success" xml:space="preserve">
+    <value>Synchronization was completed successfully :)</value>
+  </data>
+  <data name="Sync_Synchronizing_Progress" xml:space="preserve">
+    <value>Synchronizing {0} ...</value>
+  </data>
+  <data name="Spendings_Currency_AUDollar" xml:space="preserve">
+    <value>Dollar (Australia)</value>
+  </data>
+  <data name="Spendings_Currency_BULev" xml:space="preserve">
+    <value>Lev (Bulgaria)</value>
+  </data>
+  <data name="Spendings_Currency_CADollar" xml:space="preserve">
+    <value>Dollar (Canada)</value>
+  </data>
+  <data name="Spendings_Currency_CHFrank" xml:space="preserve">
+    <value>Frank (Switzerland)</value>
+  </data>
+  <data name="Spendings_Currency_CZKoruna" xml:space="preserve">
+    <value>Koruna (Czech Rep.)</value>
+  </data>
+  <data name="Spendings_Currency_DNKrona" xml:space="preserve">
+    <value>Krona (Denmark)</value>
+  </data>
+  <data name="Spendings_Currency_ICKrona" xml:space="preserve">
+    <value>Krona (Iceland)</value>
+  </data>
+  <data name="Spendings_Currency_PLZloty" xml:space="preserve">
+    <value>Zloty (Poland)</value>
+  </data>
+  <data name="Spendings_Currency_SWKrona" xml:space="preserve">
+    <value>Krona (Sweden)</value>
+  </data>
+  <data name="Spendings_Currency_TRLira" xml:space="preserve">
+    <value>Lira (Turkey)</value>
+  </data>
+  <data name="Spendings_Currency_NRKrona" xml:space="preserve">
+    <value>Krona (Norway)</value>
+  </data>
+  <data name="Route_Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Route_Unselect" xml:space="preserve">
+    <value>Unselect</value>
+  </data>
+  <data name="SignIn_Request_Reset_Password_Fail" xml:space="preserve">
+    <value>Can't send email to reset password. Please, try agail later or contact us: utraveler_helpdesk@yahoo.com</value>
+  </data>
+  <data name="SignIn_Request_Reset_Password_Progress" xml:space="preserve">
+    <value>Sending a request to reset password...</value>
+  </data>
+  <data name="SignIn_Request_Reset_Password_Success" xml:space="preserve">
+    <value>The code to reset the password has been sent to the indicated email. It may take about 5 min.</value>
+  </data>
+  <data name="SignIn_UnexpectedServer_Error" xml:space="preserve">
+    <value>Cannot sign in user. Error: {0} :(</value>
+  </data>
+  <data name="Time_Date_Format" xml:space="preserve">
+    <value>HH:mm</value>
+  </data>
+  <data name="PlanItemType_Cafe" xml:space="preserve">
+    <value>Cafe</value>
+  </data>
+  <data name="PlanItemType_Camping" xml:space="preserve">
+    <value>Camping</value>
+  </data>
+  <data name="PlanItemType_Car" xml:space="preserve">
+    <value>Car Rent</value>
+  </data>
+  <data name="PlanItemType_Cinema" xml:space="preserve">
+    <value>Cinema</value>
+  </data>
+  <data name="PlanItemType_Club" xml:space="preserve">
+    <value>Club</value>
+  </data>
+  <data name="PlanItemType_Concert" xml:space="preserve">
+    <value>Concert</value>
+  </data>
+  <data name="PlanItemType_Hotel" xml:space="preserve">
+    <value>Hotel</value>
+  </data>
+  <data name="PlanItemType_House" xml:space="preserve">
+    <value>House</value>
+  </data>
+  <data name="PlanItemType_Meeting" xml:space="preserve">
+    <value>Meeting</value>
+  </data>
+  <data name="PlanItemType_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="PlanItemType_Pub" xml:space="preserve">
+    <value>Pub</value>
+  </data>
+  <data name="PlanItemType_Restaurant" xml:space="preserve">
+    <value>Restaurant</value>
+  </data>
+  <data name="PlanItemType_Showplace" xml:space="preserve">
+    <value>Showplace</value>
+  </data>
+  <data name="PlanItemType_Theatre" xml:space="preserve">
+    <value>Theatre</value>
+  </data>
+  <data name="PlanItem_CheckIn" xml:space="preserve">
+    <value>check-in</value>
+  </data>
+  <data name="PlanItem_CheckOut" xml:space="preserve">
+    <value>check-out</value>
+  </data>
+  <data name="PlanItemType_Shopping" xml:space="preserve">
+    <value>Shopping</value>
+  </data>
+  <data name="PlanItem_Undated" xml:space="preserve">
+    <value>Undated</value>
+  </data>
+  <data name="TripPlan" xml:space="preserve">
+    <value>Trip Plan</value>
+  </data>
+  <data name="PlanItemType_Bus" xml:space="preserve">
+    <value>Bus</value>
+  </data>
+  <data name="PlanItemType_Ferry" xml:space="preserve">
+    <value>Ferry</value>
+  </data>
+  <data name="PlanItemType_Flight" xml:space="preserve">
+    <value>Flight</value>
+  </data>
+  <data name="PlanItemType_Ship" xml:space="preserve">
+    <value>Ship</value>
+  </data>
+  <data name="PlanItemType_Taxi" xml:space="preserve">
+    <value>Taxi</value>
+  </data>
+  <data name="PlanItemType_Train" xml:space="preserve">
+    <value>Train</value>
+  </data>
+  <data name="Spendings_Currency_ARDram" xml:space="preserve">
+    <value>Dram (Armenia)</value>
+  </data>
+  <data name="Spendings_Currency_AZManat" xml:space="preserve">
+    <value>Manat (Azerbaijan)</value>
+  </data>
+  <data name="Spendings_Currency_CNYuan" xml:space="preserve">
+    <value>Yuan (China)</value>
+  </data>
+  <data name="Spendings_Currency_INRupee" xml:space="preserve">
+    <value>Rupee (India)</value>
+  </data>
+  <data name="Spendings_Currency_ISShekel" xml:space="preserve">
+    <value>Shekel (Israel)</value>
+  </data>
+  <data name="Spendings_Currency_JPYen" xml:space="preserve">
+    <value>Yen (Japan)</value>
+  </data>
+  <data name="Spendings_Currency_KOWon" xml:space="preserve">
+    <value>Won (Korea)</value>
+  </data>
+  <data name="Spendings_Currency_MKDenar" xml:space="preserve">
+    <value>Denar (Makedonia)</value>
+  </data>
+  <data name="Spendings_Currency_UAEDirham" xml:space="preserve">
+    <value>Dirham (UAE)</value>
+  </data>
+  <data name="PlanItemType_AmuzementPark" xml:space="preserve">
+    <value>Amuzement Park</value>
+  </data>
+  <data name="PlanItemType_ATM" xml:space="preserve">
+    <value>ATM</value>
+  </data>
+  <data name="PlanItemType_Bank" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="PlanItemType_Beach" xml:space="preserve">
+    <value>Beach</value>
+  </data>
+  <data name="PlanItemType_Bicycle" xml:space="preserve">
+    <value>Bicycle</value>
+  </data>
+  <data name="PlanItemType_Church" xml:space="preserve">
+    <value>Church</value>
+  </data>
+  <data name="PlanItemType_Entertainment" xml:space="preserve">
+    <value>Entertainment</value>
+  </data>
+  <data name="PlanItemType_Library" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="PlanItemType_Market" xml:space="preserve">
+    <value>Market</value>
+  </data>
+  <data name="PlanItemType_Motorcycle" xml:space="preserve">
+    <value>Motorcycle</value>
+  </data>
+  <data name="PlanItemType_Museum" xml:space="preserve">
+    <value>Museum</value>
+  </data>
+  <data name="PlanItemType_Park" xml:space="preserve">
+    <value>Park</value>
+  </data>
+  <data name="PlanItemType_Parking" xml:space="preserve">
+    <value>Parking</value>
+  </data>
+  <data name="PlanItemType_Petrol" xml:space="preserve">
+    <value>Petrol</value>
+  </data>
+  <data name="PlanItemType_Pool" xml:space="preserve">
+    <value>Pool</value>
+  </data>
+  <data name="PlanItemType_Stadium" xml:space="preserve">
+    <value>Stadium</value>
+  </data>
+  <data name="PlanItemType_Zoo" xml:space="preserve">
+    <value>Zoo</value>
+  </data>
+</root>

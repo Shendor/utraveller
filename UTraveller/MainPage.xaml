@@ -1,0 +1,305 @@
+﻿<base:BasePhoneApplicationPage
+    x:Class="UTraveller.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:appBar="clr-namespace:AppBarUtils;assembly=AppBarUtils"       
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+    xmlns:live="clr-namespace:Microsoft.Live.Controls;assembly=Microsoft.Live.Controls"
+    xmlns:converter="clr-namespace:UTraveller.Common.Converter"
+    xmlns:base="clr-namespace:UTraveller.Common.Control"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+
+    <base:BasePhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
+
+            <DataTemplate x:Key="EventsTimeLineTemplate">
+                <Grid Height="305" Margin="0,0,5,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition />
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Tap">
+                            <cmd:EventToCommand Command="{Binding ShowEventDetailsCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="{Binding CurrentItemLabel}" Command="{Binding CurrentEventCommand}"/>
+                            <toolkit:MenuItem Header="Remove" Command="{Binding DeleteEventCommand}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+
+                    <Ellipse Fill="{Binding BackgroundColor}" StrokeThickness="2" Stroke="{Binding MainColor}"
+                             Width="30" Height="30"/>
+                    <TextBlock Grid.Column="1" Text="{Binding DateRange}" Style="{StaticResource TimeLineTextStyle}"
+                                   Foreground="{Binding TextColor}"  Margin="-20,0,0,0"/>
+
+                    <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BorderThickness="2"
+                            BorderBrush="{Binding MainColor}" Background="{Binding BackgroundColor}" Margin="-20,5,0,0">
+                    </Border>
+
+                    <Image Grid.Row="1" Grid.Column="1" Source="{Binding Thumbnail}" Margin="-18,7,2,0"
+                                         Stretch="UniformToFill"/>
+
+                    <Grid Grid.Row="2" Grid.Column="1" Margin="-20,0,0,0">
+                        <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left" Margin="5,0,120,0">
+                            <TextBlock Text="{Binding Name}" FontSize="36" Foreground="{Binding TextColor}"/>
+                        </Viewbox>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                            <Border Background="{Binding MainColor}" Width="40" Height="40">
+                                <Border.OpacityMask>
+                                    <ImageBrush ImageSource="/Assets/Icons/image.png" />
+                                </Border.OpacityMask>
+                            </Border>
+                            <TextBlock Text="{Binding PhotosQuantity}" Foreground="{Binding TextColor}" VerticalAlignment="Center" Margin="5,2,5,2"
+                                       Style="{StaticResource LargeTextStyle}" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </base:BasePhoneApplicationPage.Resources>
+
+    <Grid Background="{Binding BackgroundColor}">
+        <phone:Pivot Name="mainPivot" SelectedIndex="1">
+            <phone:PivotItem Margin="0,-10,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="coverHeight" Height="380*"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="Auto" MaxHeight="100"/>
+                        <RowDefinition Height="60*" MinHeight="60"/>
+                    </Grid.RowDefinitions>
+
+                    <Border x:Name="coverBorder" Grid.RowSpan="2" Grid.ColumnSpan="3" BorderBrush="{Binding MainColor}" Background="{Binding BackgroundColor}" 
+                            BorderThickness="0,0,0,2" Tap="ChangeCoverTap"/>
+                    <Border Grid.Column="2" Width="60" Height="60"
+                            HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Opacity="0.3" Background="{Binding MainColor}" Tap="ChangeCoverTap">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="/Assets/Images/hand.png"/>
+                        </Border.OpacityMask>
+                    </Border>
+                    
+                    <StackPanel Name="swipeHelpPanel" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Center" 
+                                Orientation="Horizontal" Height="60" Visibility="Collapsed">
+                        <Image Source="Assets/Icons/arrow_left.png" VerticalAlignment="Center"
+                               Width="40"/>
+                        <TextBlock Text="swipe left or right to view trips" VerticalAlignment="Center"/>
+                        <Image Source="Assets/Icons/arrow_right.png" VerticalAlignment="Center"
+                               Width="40"/>
+                    </StackPanel>
+                    
+                    <Image Name="cover" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="0,0,0,2" HorizontalAlignment="Center"
+                           Source="{Binding Cover}" Opacity="{Binding CoverOpacity}" Stretch="UniformToFill" VerticalAlignment="Top"
+                           Tap="ChangeCoverTap">
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu>
+                                <toolkit:MenuItem Header="Remove Cover" Command="{Binding DeleteCoverCommand}"/>
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+                    </Image>
+
+                    <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5">
+                        <TextBlock Text="{Binding EventsQuantity}" Style="{StaticResource LargeTextStyle}" HorizontalAlignment="Center"
+                       Foreground="{Binding TextColor}"/>
+                        <TextBlock Text="trips" Style="{StaticResource LargeTextStyle}" HorizontalAlignment="Center"
+                       Foreground="{Binding TextColor}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" 
+                                VerticalAlignment="Bottom" Margin="0,0,0,5">
+                        <TextBlock Text="{Binding PhotosQuantity}" Style="{StaticResource LargeTextStyle}" HorizontalAlignment="Center"
+                                  Foreground="{Binding TextColor}"/>
+                        <TextBlock Text="photos" Style="{StaticResource LargeTextStyle}" HorizontalAlignment="Center"
+                                    Foreground="{Binding TextColor}"/>
+                    </StackPanel>
+
+                    <Ellipse Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="3" StrokeThickness="2"
+                            Stroke="{Binding MainColor}"  Fill="{Binding BackgroundColor}" Tap="ChangeAvatarTap"/>
+
+                    <Image Name="avatar" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" 
+                             Source="{Binding Avatar}" Tap="ChangeAvatarTap" Stretch="UniformToFill">
+                        <Image.Clip>
+                            <EllipseGeometry RadiusX="75" RadiusY="75" Center="80,80"/>
+                        </Image.Clip>
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu>
+                                <toolkit:MenuItem Header="Remove Avatar" Command="{Binding DeleteAvatarCommand}"/>
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+                    </Image>
+                    
+                    <StackPanel Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center"
+                        Margin="0,20,0,0">
+                        <TextBox MinWidth="100" FontSize="35"
+                                 Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Center" TextAlignment="Center"
+                                 Style="{StaticResource TransparentTextBoxStyle}" Foreground="{Binding TextColor}"/>
+                        <TextBox MinWidth="100" MaxHeight="100" FontSize="18" Margin="0,5,0,0" TextWrapping="Wrap" AcceptsReturn="True"
+                                 Text="{Binding About, Mode=TwoWay}" Style="{StaticResource TransparentTextBoxStyle}" TextAlignment="Center"
+                                 Foreground="{Binding TextColor}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+
+                    <Button Grid.Row="4" Grid.Column="2" Style="{StaticResource SmallEllipseButton}"
+                       HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                          Margin="7,3,7,3" Command="{Binding SettingsCommand}">
+                        <ImageBrush ImageSource="/Assets/Icons/settings.png" />
+                    </Button>
+                </Grid>
+            </phone:PivotItem>
+
+            <phone:PivotItem Margin="-1,-1,-1, 0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    
+                    <Line Grid.Row="1" Grid.RowSpan="2" 
+                          X1="10" Y1="0" X2="10" Y2="100" Stretch="UniformToFill" HorizontalAlignment="Center"
+			              Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"
+                           Text="trips" Style="{StaticResource LargeTextStyle}" Foreground="{Binding TextColor}"/>
+                    
+                    <Button Style="{StaticResource EllipseButton}"
+                            Command="{Binding EventViewModel.AddEventCommand}">
+                        <ImageBrush ImageSource="/Assets/AppBar/add.png" />
+                    </Button>
+                    
+                    <Grid Grid.Column="1" HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Line X1="0" Y1="40" X2="40" Y2="40" Stroke="{Binding MainColor}" StrokeThickness="2"/>
+                        
+                        <Button Grid.Column="1" Style="{StaticResource ImageButton}"
+                                Tap="ChangeToProfileViewButtonTap">
+                            <Image Source="{Binding Avatar}" />
+                        </Button>
+                    </Grid>
+
+                    <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Margin="0,15,0,0">
+                        <ItemsControl ItemsSource="{Binding EventViewModel.Events}" HorizontalContentAlignment="Stretch"
+                              ItemTemplate="{StaticResource EventsTimeLineTemplate}">
+                        <!--<ItemsControl HorizontalContentAlignment="Stretch">
+                            <Grid Height="300" Margin="0,0,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Tap">
+                                        <cmd:EventToCommand Command="{Binding ShowEventDetailsCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu>
+                                        <toolkit:MenuItem Header="{Binding CurrentItemLabel}" Command="{Binding CurrentEventCommand}"/>
+                                        <toolkit:MenuItem Header="Remove" Command="{Binding DeleteEventCommand}"/>
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+                                
+                                <Ellipse Fill="DodgerBlue" Width="30" Height="30" />
+                                <TextBlock Grid.Column="1" Text="{Binding DateRange}" Style="{StaticResource TimeLineTextStyle}"
+                                   Foreground="White"/>
+                            
+
+                                <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"  Background="DodgerBlue" Margin="-20,5,0,0"
+                                   Visibility="{Binding HasNoImage, Converter={StaticResource visibilityConverter}}"/>
+
+                                <Image Grid.Row="1" Grid.Column="1" Source="{Binding Thumbnail}" Margin="-20,5,0,0"
+                                         Stretch="UniformToFill"/>
+                                
+                                <Grid Grid.Row="2" Grid.Column="1" Margin="-20,0,0,0">
+                                    <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left" Margin="3,0,120,0">
+                                        <TextBlock  Text="Event" FontSize="40" Foreground="{Binding TextColor}"/>
+                                    </Viewbox>
+                                    <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right" >
+                                        <Image Source="/Assets/Icons/image.png" Width="40"/>
+                                        <TextBlock Text="23" Foreground="{Binding TextColor}" VerticalAlignment="Center" Margin="5,2,3,2"
+                                                         Style="{StaticResource LargeTextStyle}" HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>-->
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="20"
+                                Visibility="{Binding EventViewModel.HasNoEvents, Converter={StaticResource visibilityConverter}}">
+                        <Border Height="200" Width="200"
+                            Opacity="0.2" Background="{Binding MainColor}">
+                            <Border.OpacityMask>
+                                <ImageBrush ImageSource="/Assets/Images/photos.png"/>
+                            </Border.OpacityMask>
+                        </Border>
+                        <TextBlock Style="{StaticResource MiddleTextStyle}" HorizontalAlignment="Center"
+                                   TextWrapping="Wrap" Margin="10" Opacity="0.2" Foreground="{Binding TextColor}"
+                                   Text="You don't have any trips. You can add some using the 'Plus' button above :)" />
+
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Style="{StaticResource MiddleTextStyle}" HorizontalAlignment="Center"
+                                   TextWrapping="Wrap" Margin="10" Opacity="0.2" Foreground="{Binding TextColor}"
+                                   Text="or restore them from your OneDrive" />
+                            <Button Margin="5,0,0,0" Style="{StaticResource SmallEllipseButton}"
+                                    Command="{Binding EventViewModel.DownloadTripsCommand}">
+                                <ImageBrush ImageSource="/Assets/Icons/download.png" />
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
+
+        <live:SignInButton Name="signInLiveButton"  Visibility="Collapsed"
+                            Scopes="wl.signin wl.basic wl.skydrive wl.skydrive_update"
+                            Branding="Skydrive" ClientId="{Binding LiveClientId}" 
+                            TextType="Connect" SessionChanged="SignInMicrosoftAccountSessionChanged">
+        </live:SignInButton>
+    </Grid>
+
+</base:BasePhoneApplicationPage>

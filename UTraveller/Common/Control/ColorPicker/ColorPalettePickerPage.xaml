@@ -1,0 +1,54 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UTraveller.Common.Control.ColorPicker.ColorPalettePickerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:c4fControls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <phone:PhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </phone:PhoneApplicationPage.Resources>
+
+    <Grid Margin="2" Background="{Binding BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <ItemsControl ItemsSource="{Binding ColorPalette}" VerticalAlignment="Top" Margin="5" Tap="PaletteTap">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <toolkit:WrapPanel  />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="5" Height="80" Width="80" Background="{Binding }" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <!--<Border Margin="5" Height="80" Width="80" Background="#68c4db" />-->
+      
+        </ItemsControl>
+
+        <Button Grid.Row="1" Style="{StaticResource SmallEllipseButton}" HorizontalAlignment="Center"
+                Tap="CloseButtonTap">
+            <ImageBrush ImageSource="/Assets/AppBar/close.png" />
+        </Button>
+    </Grid>
+
+
+</phone:PhoneApplicationPage>

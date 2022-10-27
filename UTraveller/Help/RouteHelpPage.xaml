@@ -1,0 +1,79 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UTraveller.Help.RouteHelpPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False" >
+
+    <phone:PhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </phone:PhoneApplicationPage.Resources>
+    <ScrollViewer Background="{Binding BackgroundColor}">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock TextWrapping="Wrap" Margin="10" Style="{StaticResource MiddleTextStyle}" Foreground="{Binding TextColor}"
+                Text="How to create and use routes" HorizontalAlignment="Center"/>
+
+            <TextBlock Grid.Row="1" TextWrapping="Wrap" Margin="10" Style="{StaticResource MiddleTextStyle}" Foreground="{Binding TextColor}"
+                Text="1) Go to https://mapsengine.google.com/maps or https://google.com/maps if you are connected to your Goolge account you can start to create your map. Export your map to a KML or KMZ file as described in the image below:"/>
+            
+            <Image Grid.Row="2" Margin="5" Width="350" 
+                   Source="/Assets/Images/route_help_1.jpg"/>
+
+            <TextBlock Grid.Row="3" TextWrapping="Wrap" Margin="10" Style="{StaticResource MiddleTextStyle}" Foreground="{Binding TextColor}"
+                Text="2) Put this file in your device (e.g. Documents folder) or upload it in your OneDrive as described in the image below:"/>
+
+            <Image Grid.Row="4" Margin="5" Width="350"
+                   Source="/Assets/Images/route_help_2.jpg"/>
+
+            <TextBlock Grid.Row="5" TextWrapping="Wrap" Margin="10" Style="{StaticResource MiddleTextStyle}" Foreground="{Binding TextColor}"
+                Text="3) Choose a trip in the App and go to the Map. In the menu below tap on Routes:"/>
+
+            <Image Grid.Row="6" Margin="5" Width="350"
+                   Source="/Assets/Images/route_help_3.jpg"/>
+
+            <TextBlock Grid.Row="7" TextWrapping="Wrap" Margin="10" Style="{StaticResource MiddleTextStyle}" Foreground="{Binding TextColor}"
+                Text="4) Add this file to the chosen trip from your Device (1) or OneDrive (2):"/>
+
+            <Image Grid.Row="8" Margin="5" Width="350"
+                   Source="/Assets/Images/route_help_4.jpg"/>
+
+            <TextBlock Grid.Row="9" TextWrapping="Wrap" Margin="10" Style="{StaticResource MiddleTextStyle}" Foreground="{Binding TextColor}"
+                Text="5) After you selected the file it will be processed and added to the trip. Note, that if you don't have an internet connection all pushpins of the route will have default icons."/>
+
+            <TextBlock Grid.Row="10" TextWrapping="Wrap" Margin="10" Style="{StaticResource MiddleTextStyle}" Foreground="{Binding TextColor}"
+                Text="6) Choose some routes from the list and tap on the button below to apply. The route will be displayed on the map. You can tap on every pushpin to view their content:"/>
+            
+            <Image Grid.Row="11" Margin="5" Width="350"
+                   Source="/Assets/Images/route_help_6.jpg"/>
+        </Grid>
+    </ScrollViewer>
+
+</phone:PhoneApplicationPage>

@@ -1,0 +1,32 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UTraveller.Common.Control.SplashScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False" Background="#262a32">
+
+    <Grid x:Name="layoutRoot" Background="#262a32">
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>-->
+        <!--<ProgressBar Name="progressBar" Grid.Row="0" Margin="10" Foreground="#2a884c" IsIndeterminate="True" />-->
+        <Border  Grid.Row="0" x:Name="logoBorder" Grid.RowSpan="2" Background="#2a884c" Width="300" Height="300">
+            <Border.OpacityMask>
+                <ImageBrush ImageSource="/Assets/SplashScreen/splashscreen.png" />
+            </Border.OpacityMask>
+        </Border>
+        <!--<TextBlock Name="waitText" Margin="2" Text="Please Wait..."
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                   Foreground="WhiteSmoke" FontSize="16" />-->
+    </Grid>
+
+</phone:PhoneApplicationPage>

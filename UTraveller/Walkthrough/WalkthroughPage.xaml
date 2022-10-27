@@ -1,0 +1,275 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UTraveller.Walkthrough.WalkthroughPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:local="clr-namespace:UTraveller.Walkthrough"
+    xmlns:converter="clr-namespace:UTraveller.Common.Converter"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <phone:PhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
+            
+        </ResourceDictionary>
+    </phone:PhoneApplicationPage.Resources>
+    
+    <toolkit:FlipView Name="flipView" Background="{Binding BackgroundColor}">
+
+        <toolkit:FlipViewItem>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="{Binding MainColor}" Width="300" Height="300"
+                        VerticalAlignment="Center" Margin="5,15,5,5">
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="/Assets/SplashScreen/splashscreen.png" />
+                    </Border.OpacityMask>
+                </Border>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource WalkthroughTitleTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Welcome to uTraveler :)" />
+
+                <TextBlock Grid.Row="2" Style="{StaticResource WalkthroughContentTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Swipe right to start a short walkthrough" />
+            </Grid>
+        </toolkit:FlipViewItem>
+        
+        <toolkit:FlipViewItem>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+                
+                <Border Background="{Binding MainColor}" Width="400" Height="400"
+                        VerticalAlignment="Center" Margin="5,15,5,5">
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="/Assets/Walkthrough/trip_walkthrough.png" />
+                    </Border.OpacityMask>
+                </Border>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource WalkthroughTitleTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Manage your trips offline" />
+
+                <TextBlock Grid.Row="2" Style="{StaticResource WalkthroughContentTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Wherever you travel you can add some photos or comments and check your routes even if you don't have an internet connection" />
+                
+                <local:WalkthroughPagination Grid.Row="3" CurrentPage="0"/>
+            </Grid>
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="{Binding MainColor}" Width="400" Height="400"
+                        VerticalAlignment="Center" Margin="5,15,5,5">
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="/Assets/Walkthrough/sync_walkthrough.png" />
+                    </Border.OpacityMask>
+                </Border>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource WalkthroughTitleTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Synchronize your trips with cloud" />
+
+                <TextBlock Grid.Row="2" Style="{StaticResource WalkthroughContentTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="All your trips can be stored both on your device and remote cloud storage for your account" />
+
+                <local:WalkthroughPagination Grid.Row="3" CurrentPage="1"/>
+            </Grid>
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="{Binding MainColor}" Width="400" Height="400"
+                        VerticalAlignment="Center" Margin="5,15,5,5">
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="/Assets/Walkthrough/route_walkthrough.png" />
+                    </Border.OpacityMask>
+                </Border>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource WalkthroughTitleTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Add your custom routes and points of interests" />
+
+                <TextBlock Grid.Row="2" Style="{StaticResource WalkthroughContentTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Create some routes using Google Maps, export to KML\KMZ files and add them to your trips" />
+
+                <local:WalkthroughPagination Grid.Row="3" CurrentPage="2"/>
+            </Grid>
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="{Binding MainColor}" Width="400" Height="400"
+                        VerticalAlignment="Center" Margin="5,15,5,5">
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="/Assets/Walkthrough/trip_plan_walkthrough.png" />
+                    </Border.OpacityMask>
+                </Border>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource WalkthroughTitleTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Compose your trip plan" />
+
+                <TextBlock Grid.Row="2" Style="{StaticResource WalkthroughContentTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Create a plan for your trip for places you want to visit or hotels you booked. Put them on the map manually or assigning an address and see them on the list or map grouped by day" />
+
+                <local:WalkthroughPagination Grid.Row="3" CurrentPage="3"/>
+            </Grid>
+        </toolkit:FlipViewItem>
+
+
+        <toolkit:FlipViewItem>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="{Binding MainColor}" Width="400" Height="400"
+                        VerticalAlignment="Center" Margin="5,15,5,5">
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="/Assets/Walkthrough/money_spendings_walkthrough.png" />
+                    </Border.OpacityMask>
+                </Border>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource WalkthroughTitleTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Track your expense" />
+
+                <TextBlock Grid.Row="2" Style="{StaticResource WalkthroughContentTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Record how much money you spent for a particular thing in your trip" />
+
+                <local:WalkthroughPagination Grid.Row="3" CurrentPage="4"/>
+            </Grid>
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="{Binding MainColor}" Width="400" Height="400"
+                        VerticalAlignment="Center" Margin="5,15,5,5">
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="/Assets/Walkthrough/share_walkthrough.png" />
+                    </Border.OpacityMask>
+                </Border>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource WalkthroughTitleTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Facebook integration" />
+
+                <TextBlock Grid.Row="2" Style="{StaticResource WalkthroughContentTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Share your photos or post some messages to Facebook. Also you can write and see comments and likes of a post" />
+
+                <local:WalkthroughPagination Grid.Row="3" CurrentPage="5"/>
+            </Grid>
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="{Binding MainColor}" Width="400" Height="400"
+                        VerticalAlignment="Center" Margin="5,15,5,5">
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="/Assets/Walkthrough/settings_walkthrough.png" />
+                    </Border.OpacityMask>
+                </Border>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource WalkthroughTitleTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Interface customization" />
+
+                <TextBlock Grid.Row="2" Style="{StaticResource WalkthroughContentTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Customize the interface changing the colors of background, foreground or text" />
+
+                <local:WalkthroughPagination Grid.Row="3" CurrentPage="6"/>
+            </Grid>
+        </toolkit:FlipViewItem>
+
+        <toolkit:FlipViewItem Name="lastItem">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="120"/>
+                </Grid.RowDefinitions>
+
+                <Button Style="{StaticResource LargeEllipseButton}"
+                        Command="{Binding EnterAppCommand}">
+                    <ImageBrush ImageSource="/Assets/UtravelerIcon.png"/>
+                </Button>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource WalkthroughContentTextStyle}"
+                           Foreground="{Binding TextColor}"
+                           Text="Tap the button to start :)" />
+            </Grid>
+        </toolkit:FlipViewItem>
+    </toolkit:FlipView>
+
+</phone:PhoneApplicationPage>

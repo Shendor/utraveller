@@ -1,0 +1,11 @@
+syntax: glob
+*obj*
+*Bin*
+/Bin/**
+Bin/**
+/obj/**
+LocalRepositoryTest/*
+/LocalRepositoryImpl
+LocalRepositoryImpl/obj/**
+RepositoryApi\Bin\**
+ServiceImpl/Bin/ARM/**

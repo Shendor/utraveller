@@ -1,0 +1,124 @@
+﻿<base:BasePhoneApplicationPage
+    x:Class="UTraveller.Auth.UserSignInPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:base="clr-namespace:UTraveller.Common.Control"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <base:BasePhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </base:BasePhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="{Binding BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition />
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+        <Border Background="{Binding MainColor}" Width="200" Height="200" VerticalAlignment="Bottom">
+            <Border.OpacityMask>
+                <ImageBrush ImageSource="/Assets/SplashScreen/splashscreen.png" />
+            </Border.OpacityMask>
+        </Border>
+
+        <StackPanel Grid.Row="1" Margin="70,20,70,20">
+            <TextBlock Text="Sign In" Margin="5" Foreground="{Binding TextColor}"
+                       HorizontalAlignment="Center" Style="{StaticResource MiddleTextStyle}"/>
+            <Grid Height="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="2,2,0,2" BorderBrush="{Binding MainColor}"/>
+                <Border Background="{Binding MainColor}" Width="50" Height="50">
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="/Assets/Icons/mail.png"/>
+                    </Border.OpacityMask>
+                </Border>
+                <Border Grid.Column="1" BorderThickness="2" BorderBrush="{Binding MainColor}"/>
+
+                <toolkit:PhoneTextBox Grid.Column="1" Text="{Binding Path=Username, Mode=TwoWay}" PlaceholderText="Write your email" Margin="5,0,5,0"
+                                      Style="{StaticResource TransparentPhoneTextBoxStyle}" Foreground="{Binding TextColor}"
+                                      VerticalAlignment="Center" TextChanged="PhoneTextBoxTextChanged"/>
+            </Grid>
+            
+            <Grid Height="60" Margin="0,30,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="2,2,0,2" BorderBrush="{Binding MainColor}"/>
+                <Border Background="{Binding MainColor}" Width="40" Height="40">
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="/Assets/Icons/lock2.png"/>
+                    </Border.OpacityMask>
+                </Border>
+                <Border Grid.Column="1" BorderThickness="2" BorderBrush="{Binding MainColor}"/>
+                <toolkit:PhoneTextBox Name="passwordPlaceholder" Grid.Column="1" PlaceholderText="Write password" Margin="5,0,5,0"
+                                      Style="{StaticResource TransparentPhoneTextBoxStyle}" Foreground="{Binding TextColor}"
+                                      VerticalAlignment="Center" IsEnabled="False"/>
+                <PasswordBox Grid.Column="1" Password="{Binding Path=Password, Mode=TwoWay}" 
+                                           Style="{StaticResource TransparentPasswordBoxStyle}"
+                         Margin="5,0,5,0" Foreground="{Binding TextColor}" VerticalAlignment="Center" KeyUp="PhonePasswordBoxTextChanged"/>
+            </Grid>
+            
+            <Grid Margin="0,5,0,0">
+                <HyperlinkButton Content="Forgot password :(" VerticalAlignment="Top" HorizontalAlignment="Left"
+                             Foreground="{Binding TextColor}"
+                             Style="{StaticResource UnderlinedHiperLinkButtonStyle}"
+                             Tap="RequestResetPasswordButtonTap"/>
+                
+                <Button HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource SmallEllipseButton}"
+                    Command="{Binding SignUpFacebookCommand}" >
+                    <ImageBrush ImageSource="/Assets/Icons/facebook.png" />
+                </Button>
+            </Grid>
+
+            <Grid Name="requestResetPasswordPanel" Height="60" Margin="0,30,0,0" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="2" BorderBrush="{Binding MainColor}"/>
+                <toolkit:PhoneTextBox PlaceholderText="Write your email" Margin="5,0,5,0"
+                                      Style="{StaticResource TransparentPhoneTextBoxStyle}" Foreground="{Binding TextColor}"
+                                      Text="{Binding Path=EmailToResetPassword, Mode=TwoWay}"
+                                      VerticalAlignment="Center" TextChanged="PhoneTextBoxTextChanged"/>
+                <Border Grid.Column="1" BorderThickness="0,2,2,2" BorderBrush="{Binding MainColor}"/>
+                <Button Grid.Column="1" Style="{StaticResource SmallEllipseButton}" HorizontalAlignment="Center"
+                   Command="{Binding RequestResetPasswordCommand}">
+                    <ImageBrush ImageSource="/Assets/Icons/mail.png" />
+                </Button>
+            </Grid>
+           
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Style="{StaticResource SmallEllipseButton}" HorizontalAlignment="Left"
+                   Command="{Binding SignInUserCommand}">
+                <ImageBrush ImageSource="/Assets/AppBar/check.png" />
+            </Button>
+
+            <Button Style="{StaticResource SmallEllipseButton}" HorizontalAlignment="Right"
+                Tap="CloseButtonClick" Margin="15,0,0,0">
+                <ImageBrush ImageSource="/Assets/AppBar/close.png" />
+            </Button>
+        </StackPanel>
+    </Grid>
+
+</base:BasePhoneApplicationPage>

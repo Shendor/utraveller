@@ -1,0 +1,365 @@
+﻿<base:BasePhoneApplicationPage
+    x:Class="UTraveller.Settings.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:live="clr-namespace:Microsoft.Live.Controls;assembly=Microsoft.Live.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:base="clr-namespace:UTraveller.Common.Control"
+    xmlns:converter="clr-namespace:UTraveller.Common.Converter"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <base:BasePhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/CheckBox.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
+            
+        </ResourceDictionary>
+    </base:BasePhoneApplicationPage.Resources>
+
+    <phone:Panorama Title="settings" Foreground="{Binding TextColor}" Background="{Binding BackgroundColor}" >
+
+        <phone:PanoramaItem Header="style" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="background" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+                <Ellipse Grid.Column="1" HorizontalAlignment="Left" 
+                             Width="50" Height="50" Fill="{Binding BackgroundColor}" Margin="3,0,0,0"
+                             Stroke="Black" StrokeThickness="2"
+                             Tap="BackgroundButtonTap"/>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Text="main color" Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+                <Ellipse Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" 
+                             Width="50" Height="50" Fill="{Binding MainColor}" Margin="3,0,0,0"
+                             Stroke="Black" StrokeThickness="2"
+                             Tap="MainColorButtonTap"/>
+
+                <TextBlock Grid.Row="2" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Text="text color" Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+                <Ellipse Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" 
+                             Width="50" Height="50" Fill="{Binding TextColor}" Margin="3,0,0,0"
+                             Stroke="Black" StrokeThickness="2"
+                             Tap="TextColorButtonTap"/>
+
+                <TextBlock Grid.Row="3" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Text="landscape cover" Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                <CheckBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding IsLandscapeCover, Mode=TwoWay}"
+                          Margin="3,0,0,0" Style="{StaticResource EllipseCheckBoxStyle}" />
+
+                <TextBlock Grid.Row="4" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Top" HorizontalAlignment="Right"
+                               Text="cover opacity" Margin="0,10,3,0" Foreground="{Binding TextColor}"/>
+                <Slider Grid.Row="4" Grid.Column="2" Margin="3,0,0,0" VerticalAlignment="Bottom" 
+                            Minimum="0" Maximum="1" Value="{Binding Path=CoverOpacity, Mode=TwoWay}" Foreground="{Binding MainColor}"
+                            Background="{Binding BackgroundColor}">
+                </Slider>
+            </Grid>
+        </phone:PanoramaItem>
+
+        <phone:PanoramaItem Header="social" >
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <HyperlinkButton VerticalAlignment="Center" HorizontalAlignment="Right"  Style="{StaticResource InfoHiperLinkButtonStyle}"
+                               Content="microsoft account" Margin="0,0,3,0" Foreground="{Binding TextColor}"
+                                Tap="OneDriveHelpButtonTap"/>
+
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <live:SignInButton Margin="3,0,0,0" HorizontalAlignment="Left"
+                            Scopes="wl.signin wl.basic wl.skydrive wl.skydrive_update"
+                            Branding="Skydrive" ClientId="{Binding LiveClientId}" Style="{StaticResource SmallEllipseButton}"
+                            TextType="Connect" SessionChanged="SignInSkyDriveSessionChanged">
+                            <ImageBrush ImageSource="/Assets/Icons/microsoft.png" />
+                        </live:SignInButton>
+
+                        <TextBlock Text="{Binding OneDriveConnectionMessage}" Foreground="{Binding TextColor}" Margin="5" VerticalAlignment="Center"
+                                   Style="{StaticResource SmallTextStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Name="oneDriveHelpPanel" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Collapsed">
+                        <TextBlock Foreground="{Binding TextColor}" TextWrapping="Wrap"
+                               Margin="5"  Style="{StaticResource SmallGrayTextStyle}"
+                               Text="Connect to your Microsoft Account in order to get access to files of routes from OneDrive. If you don't connect your Microsoft Account you can upload files of rotes from your Device."/>
+
+                        <HyperlinkButton HorizontalAlignment="Left" Content="See here how it works"
+                                      Style="{StaticResource HiperLinkButtonStyle}" Foreground="{Binding TextColor}"
+                                      Command="{Binding OneDriveDetailsCommand}"/>
+                    </StackPanel>
+
+                    <HyperlinkButton Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Content="facebook" Margin="0,0,3,0" Foreground="{Binding TextColor}"
+                                  Style="{StaticResource InfoHiperLinkButtonStyle}"
+                                 Tap="FacebookHelpButtonTap"/>
+
+                    <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <Button Style="{StaticResource SmallEllipseButton}"
+                                Margin="3,0,0,0" Tap="ConnectFacebookTap">
+                            <ImageBrush ImageSource="/Assets/Icons/facebook.png" />
+                        </Button>
+                        <TextBlock Text="{Binding FacebookConnectionMessage}" Foreground="{Binding TextColor}" Margin="5" VerticalAlignment="Center"
+                                   Style="{StaticResource SmallTextStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Name="facebookHelpPanel" Grid.Row="3" Grid.ColumnSpan="2"  Visibility="Collapsed">
+                        <TextBlock Foreground="{Binding TextColor}" TextWrapping="Wrap"
+                               Margin="5" Style="{StaticResource SmallGrayTextStyle}"
+                               Text="Connect to facebook if you want to share or add to albums your photos and view comments and likes of your posts"/>
+                    </StackPanel>
+
+                    <HyperlinkButton Grid.Row="4" Style="{StaticResource InfoHiperLinkButtonStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Content="store photos on facebook" Margin="0,0,3,0" Foreground="{Binding TextColor}"
+                                 Tap="UploadFacebookButtonTap"/>
+
+                    <CheckBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" 
+                          IsChecked="{Binding IsUploadToFacebook, Mode=TwoWay}"
+                          Margin="3" Style="{StaticResource EllipseCheckBoxStyle}" />
+
+                    <TextBlock Name="uploadFacebookLabel" Grid.Row="5" Grid.ColumnSpan="2" Foreground="{Binding TextColor}" TextWrapping="Wrap" Visibility="Collapsed"
+                               Margin="5" Style="{StaticResource SmallGrayTextStyle}"
+                               Text="Photos will be saved in private facebook album called 'utraveler photos private album' and it's created automatically. It will not post anything on your timeline and if a photo is deleted it will be deleted from this album as well. If this option is switched off, your photos will not be synchronized with Cloud completely."/>
+                </Grid>
+            </ScrollViewer>
+        </phone:PanoramaItem>
+
+        <phone:PanoramaItem Header="user" >
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="avatar" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+                    <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource SmallEllipseButton}"
+                        Margin="3,0,0,0" Tap="ChangeAvatarTap">
+                        <ImageBrush ImageSource="/Assets/Icons/image.png"/>
+                    </Button>
+
+                    <TextBlock Grid.Row="1" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Text="cover" Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+                    <Button Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" Style="{StaticResource SmallEllipseButton}"
+                        Margin="3,0,0,0" Tap="ChangeCoverTap">
+                        <ImageBrush ImageSource="/Assets/Icons/image.png"/>
+                    </Button>
+
+                    <TextBlock Grid.Row="2" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Text="name" Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5"
+                         Foreground="{Binding TextColor}" Style="{StaticResource SimpleTextBoxStyle}" 
+                         Text="{Binding Path=Name, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="3" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Text="about" Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                    <TextBox Grid.Row="3" Grid.Column="1" Margin="5"
+                         Style="{StaticResource SimpleTextBoxStyle}" 
+                         Foreground="{Binding TextColor}" Text="{Binding Path=About, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="4" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Text="use your location" Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                    <CheckBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" 
+                          IsChecked="{Binding IsAllowGeoPosition, Mode=TwoWay}"
+                          Margin="3,0,0,0" Style="{StaticResource EllipseCheckBoxStyle}" />
+
+                    <TextBlock Grid.Row="5" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Text="auto-connect to cloud" Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                    <CheckBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" 
+                          IsChecked="{Binding IsConnectToServerAutomatically, Mode=TwoWay}"
+                          Margin="3,0,0,0" Style="{StaticResource EllipseCheckBoxStyle}" />
+
+                    <HyperlinkButton Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Content="connect to cloud" Margin="0,0,3,0" Foreground="{Binding TextColor}"
+                                  Style="{StaticResource InfoHiperLinkButtonStyle}"
+                                 Tap="ConnectToServerHelpButtonTap"/>
+
+                    <StackPanel Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal"
+                            Margin="3,0,0,0">
+                        <Button Style="{StaticResource SmallEllipseButton}"
+                            Command="{Binding ConnectToServerCommand}"
+                            IsEnabled="{Binding IsNotConnectedToServer}">
+                            <ImageBrush ImageSource="/Assets/AppBar/sync.png" />
+                        </Button>
+                        <TextBlock Text="{Binding ConnectedToServerMessage}" Foreground="{Binding TextColor}" Margin="5" VerticalAlignment="Center"
+                                   Style="{StaticResource SmallTextStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Name="connectToServerHelpPanel" Grid.Row="7" Grid.ColumnSpan="2" Visibility="Collapsed">
+                        <TextBlock Foreground="{Binding TextColor}" TextWrapping="Wrap"
+                               Margin="5" Style="{StaticResource SmallGrayTextStyle}"
+                               Text="If you are connected to the Cloud all your trips will be saved on remoted storage. If you are not connected to the Cloud then you can use app in offline mode and sync all your data later. This is your private data and we DO NOT use or share it."/>
+
+                        <HyperlinkButton HorizontalAlignment="Left" Content="See our Privacy Policy"
+                                     Style="{StaticResource HiperLinkButtonStyle}" Foreground="{Binding TextColor}"
+                                    NavigateUri="http://utraveler.net/privacy" TargetName="_blank" />
+                    </StackPanel>
+
+                </Grid>
+            </ScrollViewer>
+        </phone:PanoramaItem>
+
+        <phone:PanoramaItem Header="about">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="160"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Border Background="{Binding MainColor}" Margin="0,0,35,0" >
+                        <Border.OpacityMask>
+                            <ImageBrush Stretch="Uniform" ImageSource="/Assets/SplashScreen/splashscreen.png" />
+                        </Border.OpacityMask>
+                    </Border>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="1.6*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="version" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Text="1.1" Style="{StaticResource MiddleTextStyle}" VerticalAlignment="Center"
+                               Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                            <HyperlinkButton Grid.Row="4" Grid.Column="1" Content="Update" HorizontalAlignment="Left" Style="{StaticResource UnderlinedHiperLinkButtonStyle}"
+                                             Foreground="{Binding TextColor}" 
+                                             Visibility="{Binding IsNotUpToDate, Converter={StaticResource visibilityConverter}}"
+                                              Command="{Binding UpdateAppCommand}" Margin="5,0,0,0" VerticalAlignment="Center">
+                            </HyperlinkButton>
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="1" Text="website" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                        <HyperlinkButton Grid.Row="1" Grid.Column="1" Content="www.utraveler.net" NavigateUri="http://www.utraveler.net" TargetName="_blank"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="3,0,0,0" Foreground="{Binding TextColor}"
+                               Style="{StaticResource UnderlinedHiperLinkButtonStyle}"/>
+
+                        <TextBlock Grid.Row="2" Text="feedback/support" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap"
+                               Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                        <HyperlinkButton Grid.Row="2" Grid.Column="1" Content="utraveler_helpdesk@yahoo.com"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="3,0,0,0" Foreground="{Binding TextColor}" Command="{Binding WriteFeedbackCommand}"
+                               Style="{StaticResource UnderlinedHiperLinkButtonStyle}"/>
+                        
+                        <TextBlock Grid.Row="3" Text="terms and policy" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                        <HyperlinkButton Grid.Row="3" Grid.Column="1" Content="privacy policy" NavigateUri="http://www.utraveler.net/privacy.html" TargetName="_blank"
+                               Margin="3,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{Binding TextColor}"
+                               Style="{StaticResource UnderlinedHiperLinkButtonStyle}"/>
+
+                        <TextBlock Grid.Row="4" Text="from uTraveler team" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                        <HyperlinkButton Grid.Row="4" Grid.Column="1" Content="tap here :)" NavigateUri="http://www.utraveler.net/about.html" TargetName="_blank"
+                               Margin="3,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{Binding TextColor}"
+                               Style="{StaticResource UnderlinedHiperLinkButtonStyle}"/>
+
+                        <TextBlock Grid.Row="5" Text="help" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right" 
+                               Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                        <HyperlinkButton Grid.Row="5" Grid.Column="1" Content="tap here :)" HorizontalAlignment="Left" Style="{StaticResource UnderlinedHiperLinkButtonStyle}"
+                            Command="{Binding HelpCommand}" Margin="3,0,0,0" VerticalAlignment="Center"  Foreground="{Binding TextColor}">
+                        </HyperlinkButton>
+
+                        <TextBlock Grid.Row="6" Text="help (online)" Style="{StaticResource MiddleTextStyle}"
+                               VerticalAlignment="Center" HorizontalAlignment="Right" 
+                               Margin="0,0,3,0" Foreground="{Binding TextColor}"/>
+
+                        <HyperlinkButton Grid.Row="6" Grid.Column="1" Content="tap here :)" NavigateUri="http://www.utraveler.net/help.html" TargetName="_blank"
+                               Margin="3,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{Binding TextColor}"
+                               Style="{StaticResource UnderlinedHiperLinkButtonStyle}"/>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </phone:PanoramaItem>
+
+    </phone:Panorama>
+
+</base:BasePhoneApplicationPage>

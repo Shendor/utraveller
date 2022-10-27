@@ -1,0 +1,902 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2004137D-F4F4-422A-B571-4E0BB2A4BFF1}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UTraveller</RootNamespace>
+    <AssemblyName>UTraveller</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>uTraveler.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>UTraveller.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <TargetFrameworkProfile />
+    <DefaultLanguage>en-US</DefaultLanguage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Auth\UserRegistrationPage.xaml.cs">
+      <DependentUpon>UserRegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Auth\UserSignInPage.xaml.cs">
+      <DependentUpon>UserSignInPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Auth\ViewModel\UserSignInViewModel.cs" />
+    <Compile Include="Auth\ViewModel\UserRegistrationViewModel.cs" />
+    <Compile Include="Common\Control\BasePhoneApplicationPage.cs" />
+    <Compile Include="Common\Control\ColorPicker\ColorPalettePickerPage.xaml.cs">
+      <DependentUpon>ColorPalettePickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Control\ColorPicker\ColorPickerPage.xaml.cs">
+      <DependentUpon>ColorPickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Control\ColorPicker\ColorPickerViewModel.cs" />
+    <Compile Include="Common\Control\DataTemplateSelector.cs" />
+    <Compile Include="Common\Control\DateRangeEditor\DateRangeChosenMessage.cs" />
+    <Compile Include="Common\Control\DateRangeEditor\DateRangeEditor.xaml.cs">
+      <DependentUpon>DateRangeEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Control\DateRangeEditor\DateRangeEditorViewModel.cs" />
+    <Compile Include="Common\Control\DateRangeEditor\DateRangeToEditChangedMessage.cs" />
+    <Compile Include="Common\Control\Dialog\ConfirmationDialog.xaml.cs">
+      <DependentUpon>ConfirmationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Control\Dialog\ConfirmationService.cs" />
+    <Compile Include="Common\Control\Dialog\ShowConfirmDialogMessage.cs" />
+    <Compile Include="Common\Control\IActivateablePage.cs" />
+    <Compile Include="Common\Control\Notification\BaseNotificationDialog.cs" />
+    <Compile Include="Common\Control\Notification\NotificationChangedMessage.cs" />
+    <Compile Include="Common\Control\Notification\NotificationService.cs" />
+    <Compile Include="Common\Control\Notification\NotificationWindow.xaml.cs">
+      <DependentUpon>NotificationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Control\Notification\PushpinDescriptionDialog.xaml.cs">
+      <DependentUpon>PushpinDescriptionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Control\Notification\PushpinDescriptionService.cs" />
+    <Compile Include="Common\Control\ProgressBar\BackgroundProgressBar.xaml.cs">
+      <DependentUpon>BackgroundProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Control\ProgressBar\BackgroundTaskProgressService.cs" />
+    <Compile Include="Common\Control\ProgressBar\BaseTaskProgressService.cs" />
+    <Compile Include="Common\Control\ProgressBar\ProgressBarChangedMessage.cs" />
+    <Compile Include="Common\Control\ProgressBar\ProgressBarDialog.xaml.cs">
+      <DependentUpon>ProgressBarDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Control\ProgressBar\TaskProgressService.cs" />
+    <Compile Include="Common\Control\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Converter\ReverseVisibilityConverter.cs" />
+    <Compile Include="Common\Database\UTravellerLocalDatabase.cs" />
+    <Compile Include="Common\IFileOpenPickerContinue.cs" />
+    <Compile Include="Common\IocLoader.cs" />
+    <Compile Include="Common\Message\AppPropertiesChangedMessage.cs" />
+    <Compile Include="Common\Message\ChoosedPhotosMessage.cs" />
+    <Compile Include="Common\Message\ColorChangedMessage.cs" />
+    <Compile Include="Common\Message\ColorChosenMessage.cs" />
+    <Compile Include="Common\Message\DeletedPushpinPhotoMessage.cs" />
+    <Compile Include="Common\Message\DeletedEventPhotoMessage.cs" />
+    <Compile Include="Common\Message\DeletedPhotoMessage.cs" />
+    <Compile Include="Common\Message\DeletedEventMessage.cs" />
+    <Compile Include="Common\Message\DetailedImagesSelectionChangedMessage.cs" />
+    <Compile Include="Common\Message\EventChangedMessage.cs" />
+    <Compile Include="Common\Message\EventCurrentChangedMessage.cs" />
+    <Compile Include="Common\Message\ShowPlanItemPushpinsOnMapMessage.cs" />
+    <Compile Include="Common\Message\ShowPushpinItemsOnMapMessage.cs" />
+    <Compile Include="Common\Message\EventPhotosChosenMessage.cs" />
+    <Compile Include="Common\Message\ExcludeEventPhotosChangedMessage.cs" />
+    <Compile Include="Common\Message\ExcludePushpinPhotosChangedMessage.cs" />
+    <Compile Include="Common\Message\MessageDeletedMessage.cs" />
+    <Compile Include="Common\Message\NetworkStatusChangedMessage.cs" />
+    <Compile Include="Common\Message\TimelineItemsViewerChangedMessage.cs" />
+    <Compile Include="Common\Message\RouteAddedMessage.cs" />
+    <Compile Include="Common\Message\RouteChosenMessage.cs" />
+    <Compile Include="Common\Message\RouteDeletedMessage.cs" />
+    <Compile Include="Common\Message\SkyDriveFileAddedMessage.cs" />
+    <Compile Include="Common\Message\SkyDriveSessionChangedMessage.cs" />
+    <Compile Include="Common\Message\UserRegisteredMessage.cs" />
+    <Compile Include="Common\Message\UserAuthenticatedMessage.cs" />
+    <Compile Include="Common\Util\ColorGenerator.cs" />
+    <Compile Include="Common\Util\CurrencyUtil.cs" />
+    <Compile Include="Common\Util\GeoCoordinateUtils.cs" />
+    <Compile Include="Common\Util\MoneySpendingCategoryUtil.cs" />
+    <Compile Include="Common\Util\PlanItemTypeUtil.cs" />
+    <Compile Include="Common\ViewModel\BaseListViewModel.cs" />
+    <Compile Include="Common\ViewModel\BasePushpinItemInMapViewModel.cs" />
+    <Compile Include="Common\ViewModel\BaseTimeLineItemViewModel.cs" />
+    <Compile Include="Common\ViewModel\BaseViewModel.cs" />
+    <Compile Include="Common\ViewModel\IDescriptionedTimeLineItem.cs" />
+    <Compile Include="Common\ViewModel\ITimeLineItem.cs" />
+    <Compile Include="EventDetails\ViewModel\TripPlan\TripPlanViewMode.cs" />
+    <Compile Include="EventDetails\ViewModel\TripPlan\BasePlanItemViewModel.cs" />
+    <Compile Include="EventDetails\Control\TripPlanControl.xaml.cs">
+      <DependentUpon>TripPlanControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventDetails\ViewModel\TripPlan\TransportPlanItemViewModel.cs" />
+    <Compile Include="EventDetails\ViewModel\TripPlan\GroupedPlanItemViewModel.cs" />
+    <Compile Include="EventDetails\ViewModel\TripPlan\IPlanItemViewModel.cs" />
+    <Compile Include="EventDetails\ViewModel\MessageViewModel.cs" />
+    <Compile Include="EventDetails\Control\EventDetailsTimeLineItemTemplateSelector.cs" />
+    <Compile Include="Common\Converter\VisibilityConverter.cs" />
+    <Compile Include="EventDetails\Control\MoneySpendingListControl.xaml.cs">
+      <DependentUpon>MoneySpendingListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventDetails\ViewModel\GroupedEventPhotoViewModel.cs" />
+    <Compile Include="EventDetails\ViewModel\TripPlan\PlanItemViewModelFactory.cs" />
+    <Compile Include="EventDetails\ViewModel\TripPlan\RentPlanItemViewModel.cs" />
+    <Compile Include="EventDetails\ViewModel\TripPlan\PlanItemViewModel.cs" />
+    <Compile Include="EventDetails\ViewModel\TripPlan\TripPlanViewModel.cs" />
+    <Compile Include="EventMap\Control\EventMapTimeLineItemsTemplateSelector.cs" />
+    <Compile Include="EventMap\Messages\AddMessagesToPushpinMessage.cs" />
+    <Compile Include="EventMap\Messages\CreatePlanItemFromRoutePushpinMessage.cs" />
+    <Compile Include="EventMap\Messages\DeleteMessageFromMapMessage.cs" />
+    <Compile Include="EventMap\Messages\FilterPlanItemPushpinMessage.cs" />
+    <Compile Include="EventMap\Messages\PhotoDeletedFromMapMessage.cs" />
+    <Compile Include="EventMap\Messages\RoutePushpinSelectionChangedMessage.cs" />
+    <Compile Include="EventMap\PlanItemPushpinDependency.cs" />
+    <Compile Include="EventMap\ViewModel\Map\BasePushpinViewModel.cs" />
+    <Compile Include="EventMap\ViewModel\Map\MessageInMapViewModel.cs" />
+    <Compile Include="EventMap\ViewModel\Map\PlanItemLegendViewModel.cs" />
+    <Compile Include="EventMap\ViewModel\Map\PlanItemPushpinViewModel.cs" />
+    <Compile Include="Help\HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Help\MapHelpPage.xaml.cs">
+      <DependentUpon>MapHelpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Help\RouteHelpPage.xaml.cs">
+      <DependentUpon>RouteHelpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Help\ViewModel\HelpViewModel.cs" />
+    <Compile Include="ImageChooser\Control\MessagesChooser.xaml.cs">
+      <DependentUpon>MessagesChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageChooser\Messages\ExcludeMessagesFromListMessage.cs" />
+    <Compile Include="ImageChooser\Messages\MessagesChosenMessage.cs" />
+    <Compile Include="ImageChooser\ViewModel\ImageListViewModel.cs" />
+    <Compile Include="ImageChooser\ViewModel\MessagesChooserViewModel.cs" />
+    <Compile Include="MoneySpending\Message\MoneySpendingDetailsVisibilityMessage.cs" />
+    <Compile Include="MoneySpending\Message\DeleteMoneySpendingMessage.cs" />
+    <Compile Include="MoneySpending\ViewModel\MoneySpendingItemViewModel.cs" />
+    <Compile Include="MoneySpending\ViewModel\MoneySpendingListViewModel.cs" />
+    <Compile Include="EventList\EventPage.xaml.cs">
+      <DependentUpon>EventPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventMap\Messages\AddPhotosToPushpinMessage.cs" />
+    <Compile Include="EventMap\Messages\FindPushpinItemInPushpinMessage.cs" />
+    <Compile Include="Common\Message\ObjectMessage.cs" />
+    <Compile Include="Common\Message\PhonePhotosChosenMessage.cs" />
+    <Compile Include="Common\Message\PhotoPushpinDeletedMessage.cs" />
+    <Compile Include="Common\Message\EventSelectionChangedMessage.cs" />
+    <Compile Include="Common\Message\ObjectsCollectionMessage.cs" />
+    <Compile Include="Common\ViewModel\BasePushpinItemViewModel.cs" />
+    <Compile Include="EventDetails\ViewModel\PhonePhotoGroupedListChooserViewModel.cs" />
+    <Compile Include="EventMap\Messages\PushpinFoundMessage.cs" />
+    <Compile Include="EventMap\Messages\ViewPushpinPhotosMessage.cs" />
+    <Compile Include="EventMap\RoutePushpinDependency.cs" />
+    <Compile Include="EventMap\ViewModel\Map\PhotoInMapViewModel.cs" />
+    <Compile Include="EventMap\ViewModel\Map\RoutePushpinViewModel.cs" />
+    <Compile Include="ImageChooser\ViewModel\BasePhotoChooserViewModel.cs" />
+    <Compile Include="MessagePost\MessagePostPage.xaml.cs">
+      <DependentUpon>MessagePostPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MessagePost\Message\MessageChangedMessage.cs" />
+    <Compile Include="MessagePost\Message\MessagePostedMessage.cs" />
+    <Compile Include="MessagePost\ViewModel\MessagePostViewModel.cs" />
+    <Compile Include="MoneySpending\Control\MoneySpendingDetailsControl.xaml.cs">
+      <DependentUpon>MoneySpendingDetailsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MoneySpending\Control\MoneySpendingDetailsViewModel.cs" />
+    <Compile Include="MoneySpending\Message\MoneySpendingAddedMessage.cs" />
+    <Compile Include="MoneySpending\Model\CurrencyModel.cs" />
+    <Compile Include="MoneySpending\Model\MoneySpendingCategoryModel.cs" />
+    <Compile Include="MoneySpending\MoneySpendingPage.xaml.cs">
+      <DependentUpon>MoneySpendingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MoneySpending\ViewModel\MoneySpendingViewModel.cs" />
+    <Compile Include="PhotoCrop\Message\ImageCroppedMessage.cs" />
+    <Compile Include="PhotoCrop\Message\ImageToCropChangedMessage.cs" />
+    <Compile Include="PhotoCrop\PhotoCropPage.xaml.cs">
+      <DependentUpon>PhotoCropPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoCrop\ViewModel\PhotoCropViewModel.cs" />
+    <Compile Include="PhotoViewer\Control\MessageItemControl.xaml.cs">
+      <DependentUpon>MessageItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoViewer\Control\PhotoItemControl.xaml.cs">
+      <DependentUpon>PhotoItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoViewer\Messages\TimeLineItemPostedMessage.cs" />
+    <Compile Include="PhotoViewer\PhotoViewerPage.xaml.cs">
+      <DependentUpon>PhotoViewerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoViewer\ViewModel\DetailedTimelineItemViewModel.cs" />
+    <Compile Include="PhotoViewer\ViewModel\FacebookCommentViewModel.cs" />
+    <Compile Include="PhotoViewer\ViewModel\FacebookLikeViewModel.cs" />
+    <Compile Include="PhotoViewer\ViewModel\FacebookPrivacyModel.cs" />
+    <Compile Include="PhotoViewer\ViewModel\PhotoViewerViewModel.cs" />
+    <Compile Include="EventDetails\Converter\PhotoConverter.cs" />
+    <Compile Include="EventMap\Messages\ShowPushpinDetailsMessage.cs" />
+    <Compile Include="Common\ViewModel\BasePhotoListViewModel.cs" />
+    <Compile Include="EventDetails\EventDetailsPage.xaml.cs">
+      <DependentUpon>EventDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventDetails\ViewModel\EventDetailsViewModel.cs" />
+    <Compile Include="EventDetails\ViewModel\PhotoViewModel.cs" />
+    <Compile Include="EventMap\MapPushPinDependency.cs" />
+    <Compile Include="EventMap\PhotoPushpinDetailsPage.xaml.cs">
+      <DependentUpon>PhotoPushpinDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventMap\ViewModel\PushpinDetails\PushpinPhotoViewModel.cs" />
+    <Compile Include="EventMap\ViewModel\Map\EventMapViewModel.cs" />
+    <Compile Include="EventMap\ViewModel\PushpinDetails\EventPhotoListChooserViewModel.cs" />
+    <Compile Include="EventMap\ViewModel\PushpinDetails\PhotoPushpinDetailsViewModel.cs" />
+    <Compile Include="EventMap\ViewModel\Map\TimeLineItemPushpinViewModel.cs" />
+    <Compile Include="EventList\ViewModel\EventTileViewModel.cs" />
+    <Compile Include="EventList\ViewModel\EventViewModel.cs" />
+    <Compile Include="ImageChooser\Control\PhotoListChooser.xaml.cs">
+      <DependentUpon>PhotoListChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageChooser\ViewModel\PhotoListChooserViewModel.cs" />
+    <Compile Include="ImageChooser\ViewModel\PhotoListViewModel.cs" />
+    <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageChooser\Control\DetailedImageChooser.xaml.cs">
+      <DependentUpon>DetailedImageChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageChooser\Control\ImageChooser.xaml.cs">
+      <DependentUpon>ImageChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageChooser\Model\CheckedImageModel.cs" />
+    <Compile Include="ImageChooser\ViewModel\DetailedImageChooserViewModel.cs" />
+    <Compile Include="ImageChooser\ViewModel\GroupedImagesViewModel.cs" />
+    <Compile Include="ImageChooser\ViewModel\ImageChooserViewModel.cs" />
+    <Compile Include="EventMap\EventMapPage.xaml.cs">
+      <DependentUpon>EventMapPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Routes\Messages\ViewRouteDescriptionMessage.cs" />
+    <Compile Include="Routes\RoutesPage.xaml.cs">
+      <DependentUpon>RoutesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Routes\ViewModel\RoutesViewModel.cs" />
+    <Compile Include="Routes\ViewModel\RouteViewModel.cs" />
+    <Compile Include="Settings\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\ViewModel\SettingsViewModel.cs" />
+    <Compile Include="SkyDrive\Message\SkyDriveItemChangedMessage.cs" />
+    <Compile Include="SkyDrive\SkyDriveExplorerPage.xaml.cs">
+      <DependentUpon>SkyDriveExplorerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SkyDrive\ViewModel\RouteSkyDriveExplorerViewModel.cs" />
+    <Compile Include="SkyDrive\ViewModel\SkyDriveFile\BaseSkyDriveItemViewModel.cs" />
+    <Compile Include="SkyDrive\ViewModel\SkyDriveFile\ISkyDriveItem.cs" />
+    <Compile Include="SkyDrive\ViewModel\SkyDriveExplorerViewModel.cs" />
+    <Compile Include="SkyDrive\ViewModel\SkyDriveFile\SkyDriveFileViewModel.cs" />
+    <Compile Include="SkyDrive\ViewModel\SkyDriveFile\SkyDriveFolderViewModel.cs" />
+    <Compile Include="SkyDrive\ViewModel\SkyDriveFile\SkyDriveItemFactory.cs" />
+    <Compile Include="Social\Messages\FacebookSignedInMessage.cs" />
+    <Compile Include="Social\SocialAuthBrowserPage.xaml.cs">
+      <DependentUpon>SocialAuthBrowserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Social\ViewModel\SocialAuthViewModel.cs" />
+    <Compile Include="Sync\SyncListTemplateSelector.cs" />
+    <Compile Include="Sync\SyncPage.xaml.cs">
+      <DependentUpon>SyncPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sync\ViewModel\GroupedSyncItemsViewModel.cs" />
+    <Compile Include="Sync\ViewModel\SyncEntityViewModel.cs" />
+    <Compile Include="Sync\ViewModel\SyncViewModel.cs" />
+    <Compile Include="TripPlanEditor\Control\EditTransportPlanItemControl.xaml.cs">
+      <DependentUpon>EditTransportPlanItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TripPlanEditor\Control\EditPlanItemCommonControl.xaml.cs">
+      <DependentUpon>EditPlanItemCommonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TripPlanEditor\Control\EditPlanItemControl.xaml.cs">
+      <DependentUpon>EditPlanItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TripPlanEditor\Control\EditRentPlanItemControl.xaml.cs">
+      <DependentUpon>EditRentPlanItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TripPlanEditor\EditPlanItemCoordinatePage.xaml.cs">
+      <DependentUpon>EditPlanItemCoordinatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TripPlanEditor\EditPlanItemPage.xaml.cs">
+      <DependentUpon>EditPlanItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TripPlanEditor\Messages\ApplyPlanItemCoordinate.cs" />
+    <Compile Include="TripPlanEditor\Messages\EditPlanItemCoordinateMessage.cs" />
+    <Compile Include="TripPlanEditor\Messages\EditPlanItemMessage.cs" />
+    <Compile Include="TripPlanEditor\Messages\EditPlanItemTypeChangedMessage.cs" />
+    <Compile Include="TripPlanEditor\Messages\PlanItemDeletedMessage.cs" />
+    <Compile Include="TripPlanEditor\Messages\PlanItemSavedMessage.cs" />
+    <Compile Include="TripPlanEditor\Messages\ViewPlanItemCoordinateMessage.cs" />
+    <Compile Include="TripPlanEditor\Model\EditPlanItemType.cs" />
+    <Compile Include="TripPlanEditor\Model\PlanItemTypeModel.cs" />
+    <Compile Include="TripPlanEditor\ViewModel\BaseEditPlanItemViewModel.cs" />
+    <Compile Include="TripPlanEditor\ViewModel\EditTransportPlanItemViewModel.cs" />
+    <Compile Include="TripPlanEditor\ViewModel\EditOtherPlanItemViewModel.cs" />
+    <Compile Include="TripPlanEditor\ViewModel\EditPlanItemCoordinateViewModel.cs" />
+    <Compile Include="TripPlanEditor\ViewModel\EditPlanItemViewModel.cs" />
+    <Compile Include="TripPlanEditor\ViewModel\EditRentPlanItemViewModel.cs" />
+    <Compile Include="UserProfileViewModel.cs" />
+    <Compile Include="Walkthrough\ViewModel\WalkthroughViewModel.cs" />
+    <Compile Include="Walkthrough\WalkthroughPage.xaml.cs">
+      <DependentUpon>WalkthroughPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Walkthrough\WalkthroughPagination.xaml.cs">
+      <DependentUpon>WalkthroughPagination.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="Assets\Styles\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Styles\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Styles\Brush.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Styles\ToolkitControls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Styles\Text.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Styles\PhotoViewerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Auth\UserRegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Auth\UserSignInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Control\ColorPicker\ColorPalettePickerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Control\ColorPicker\ColorPickerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Control\DateRangeEditor\DateRangeEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Control\Dialog\ConfirmationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Control\Notification\NotificationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Control\Notification\PushpinDescriptionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Control\ProgressBar\BackgroundProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Control\ProgressBar\ProgressBarDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Control\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventDetails\Control\MoneySpendingListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventDetails\Control\TripPlanControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventDetails\EventDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventList\EventPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventMap\PhotoPushpinDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Help\HelpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Help\MapHelpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Help\RouteHelpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageChooser\Control\MessagesChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageChooser\Control\PhotoListChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageChooser\Control\DetailedImageChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageChooser\Control\ImageChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventMap\EventMapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MessagePost\MessagePostPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MoneySpending\Control\MoneySpendingDetailsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MoneySpending\MoneySpendingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PhotoCrop\PhotoCropPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PhotoViewer\Control\MessageItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PhotoViewer\Control\PhotoItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PhotoViewer\PhotoViewerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Routes\RoutesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SkyDrive\SkyDriveExplorerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Social\SocialAuthBrowserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sync\SyncPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TripPlanEditor\Control\EditTransportPlanItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TripPlanEditor\Control\EditPlanItemCommonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TripPlanEditor\Control\EditPlanItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TripPlanEditor\Control\EditRentPlanItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TripPlanEditor\EditPlanItemCoordinatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TripPlanEditor\EditPlanItemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Walkthrough\WalkthroughPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Walkthrough\WalkthroughPagination.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Help\Fonts\LiveSymbol.ttf" />
+    <None Include="Help\Nokia Imaging SDK.chm" />
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\AppBar\add.png" />
+    <Content Include="Assets\AppBar\back.png" />
+    <Content Include="Assets\AppBar\check.png" />
+    <Content Include="Assets\AppBar\close.png" />
+    <Content Include="Assets\AppBar\delete.png" />
+    <Content Include="Assets\AppBar\edit.png" />
+    <Content Include="Assets\AppBar\feature.camera.png" />
+    <Content Include="Assets\AppBar\sync.png" />
+    <Content Include="Assets\AppBar\target.png" />
+    <Content Include="Assets\Icons\amuzement_park.png" />
+    <Content Include="Assets\Icons\atm.png" />
+    <Content Include="Assets\Icons\back.png" />
+    <Content Include="Assets\Icons\bank.png" />
+    <Content Include="Assets\Icons\beach.png" />
+    <Content Include="Assets\Icons\bell.png" />
+    <Content Include="Assets\Icons\bicycle.png" />
+    <Content Include="Assets\Icons\bus.png" />
+    <Content Include="Assets\Icons\calendar.png" />
+    <Content Include="Assets\Icons\camera.png" />
+    <Content Include="Assets\Icons\camping.png" />
+    <Content Include="Assets\Icons\car.png" />
+    <Content Include="Assets\Icons\cart.png" />
+    <Content Include="Assets\Icons\car_navigation.png" />
+    <Content Include="Assets\Icons\car_parking.png" />
+    <Content Include="Assets\Icons\car_rent.png" />
+    <Content Include="Assets\Icons\church.png" />
+    <Content Include="Assets\Icons\cinema.png" />
+    <Content Include="Assets\Icons\clock.png" />
+    <Content Include="Assets\Icons\cloud.png" />
+    <Content Include="Assets\Icons\config.png" />
+    <Content Include="Assets\Icons\download.png" />
+    <Content Include="Assets\Icons\fast_food.png" />
+    <Content Include="Assets\Icons\ferry.png" />
+    <Content Include="Assets\Icons\file.png" />
+    <Content Include="Assets\Icons\flight.png" />
+    <Content Include="Assets\Icons\folder.png" />
+    <Content Include="Assets\Icons\fuel.png" />
+    <Content Include="Assets\Icons\arrow_left.png" />
+    <Content Include="Assets\Icons\arrow_right.png" />
+    <Content Include="Assets\Icons\circle.png" />
+    <Content Include="Assets\Icons\Club.png" />
+    <Content Include="Assets\Icons\Concert.png" />
+    <Content Include="Assets\Icons\Entertainment.png" />
+    <Content Include="Assets\Icons\Fine.png" />
+    <Content Include="Assets\Icons\gift.png" />
+    <Content Include="Assets\Icons\grid.png" />
+    <Content Include="Assets\Icons\hide_pin.png" />
+    <Content Include="Assets\Icons\Hotel.png" />
+    <Content Include="Assets\Icons\House.png" />
+    <Content Include="Assets\Icons\info.png" />
+    <Content Include="Assets\Icons\library.png" />
+    <Content Include="Assets\Icons\list.png" />
+    <Content Include="Assets\Icons\lock.png" />
+    <Content Include="Assets\Icons\lock2.png" />
+    <Content Include="Assets\Icons\mail.png" />
+    <Content Include="Assets\Icons\market.png" />
+    <Content Include="Assets\Icons\meeting.png" />
+    <Content Include="Assets\Icons\message2.png" />
+    <Content Include="Assets\Icons\message3.png" />
+    <Content Include="Assets\Icons\microsoft.png" />
+    <Content Include="Assets\Icons\money.png" />
+    <Content Include="Assets\Icons\motorcycle.png" />
+    <Content Include="Assets\Icons\museum.png" />
+    <Content Include="Assets\Icons\new_user.png" />
+    <Content Include="Assets\Icons\other.png" />
+    <Content Include="Assets\Icons\park.png" />
+    <Content Include="Assets\Icons\parking.png" />
+    <Content Include="Assets\Icons\pen.png" />
+    <Content Include="Assets\Icons\point.png" />
+    <Content Include="Assets\Icons\pool.png" />
+    <Content Include="Assets\Icons\Pub.png" />
+    <Content Include="Assets\Icons\public_transport.png" />
+    <Content Include="Assets\Icons\question.png" />
+    <Content Include="Assets\Icons\Restaurant.png" />
+    <Content Include="Assets\Icons\route.png" />
+    <Content Include="Assets\Icons\settings.png" />
+    <Content Include="Assets\Icons\event.png" />
+    <Content Include="Assets\Icons\heart.png" />
+    <Content Include="Assets\Icons\map.png" />
+    <Content Include="Assets\Icons\marker.png" />
+    <Content Include="Assets\Icons\message.png" />
+    <Content Include="Assets\Icons\onedrive.png" />
+    <Content Include="Assets\Icons\phone.png" />
+    <Content Include="Assets\Icons\share.png" />
+    <Content Include="Assets\Icons\ship.png" />
+    <Content Include="Assets\Icons\Shopping.png" />
+    <Content Include="Assets\Icons\showplace.png" />
+    <Content Include="Assets\Icons\show_pin.png" />
+    <Content Include="Assets\Icons\signin.png" />
+    <Content Include="Assets\Icons\signout.png" />
+    <Content Include="Assets\Icons\stadium.png" />
+    <Content Include="Assets\Icons\star.png" />
+    <Content Include="Assets\Icons\sync.png" />
+    <Content Include="Assets\Icons\sync2.png" />
+    <Content Include="Assets\Icons\sync3.png" />
+    <Content Include="Assets\Icons\taxi.png" />
+    <Content Include="Assets\Icons\tent.png" />
+    <Content Include="Assets\Icons\theatre.png" />
+    <Content Include="Assets\Icons\train.png" />
+    <Content Include="Assets\Icons\update.png" />
+    <Content Include="Assets\Icons\upload.png" />
+    <Content Include="Assets\Icons\user.png" />
+    <Content Include="Assets\Icons\view.png" />
+    <Content Include="Assets\Icons\image.png" />
+    <Content Include="Assets\Icons\walk.png" />
+    <Content Include="Assets\Icons\walk2.png" />
+    <Content Include="Assets\Icons\zoo.png" />
+    <Content Include="Assets\Images\device_sync.png" />
+    <Content Include="Assets\Icons\facebook.png" />
+    <Content Include="Assets\Images\hand.png" />
+    <Content Include="Assets\Images\Help\1.jpg" />
+    <Content Include="Assets\Images\Help\10.jpg" />
+    <Content Include="Assets\Images\Help\11.jpg" />
+    <Content Include="Assets\Images\Help\12.jpg" />
+    <Content Include="Assets\Images\Help\13.jpg" />
+    <Content Include="Assets\Images\Help\14.jpg" />
+    <Content Include="Assets\Images\Help\15.jpg" />
+    <Content Include="Assets\Images\Help\16.jpg" />
+    <Content Include="Assets\Images\Help\17.jpg" />
+    <Content Include="Assets\Images\Help\18.jpg" />
+    <Content Include="Assets\Images\Help\2.jpg" />
+    <Content Include="Assets\Images\Help\3.jpg" />
+    <Content Include="Assets\Images\Help\4.jpg" />
+    <Content Include="Assets\Images\Help\5.jpg" />
+    <Content Include="Assets\Images\Help\6.jpg" />
+    <Content Include="Assets\Images\Help\7.jpg" />
+    <Content Include="Assets\Images\Help\8.jpg" />
+    <Content Include="Assets\Images\Help\9.jpg" />
+    <Content Include="Assets\Images\map_help_1.jpg" />
+    <Content Include="Assets\Images\map_help_2.jpg" />
+    <Content Include="Assets\Images\map_help_3.jpg" />
+    <Content Include="Assets\Images\money_spendings.png" />
+    <Content Include="Assets\Images\photos.png" />
+    <Content Include="Assets\Images\routes.png" />
+    <Content Include="Assets\Images\route_help_1.jpg" />
+    <Content Include="Assets\Images\route_help_2.jpg" />
+    <Content Include="Assets\Images\route_help_3.jpg" />
+    <Content Include="Assets\Images\route_help_4.jpg" />
+    <Content Include="Assets\Images\route_help_5.jpg" />
+    <Content Include="Assets\Images\route_help_6.jpg" />
+    <Content Include="Assets\Images\route_icons.png" />
+    <Content Include="Assets\Icons\internet.png" />
+    <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\SplashScreen\splashscreen.png" />
+    <Content Include="Assets\SquareTile150x150.png" />
+    <Content Include="Assets\SquareTile71x71.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\UtravelerIcon.png" />
+    <Content Include="Assets\Walkthrough\money_spendings_walkthrough.png" />
+    <Content Include="Assets\Walkthrough\route_walkthrough.png" />
+    <Content Include="Assets\Walkthrough\settings_walkthrough.png" />
+    <Content Include="Assets\Walkthrough\share_walkthrough.png" />
+    <Content Include="Assets\Walkthrough\sync_walkthrough.png" />
+    <Content Include="Assets\Walkthrough\trip_plan_walkthrough.png" />
+    <Content Include="Assets\Walkthrough\trip_walkthrough.png" />
+    <Content Include="Assets\WideLogo.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AppBarUtils">
+      <HintPath>..\packages\AppBarUtils.2.4\lib\windowsphone8\AppBarUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WP8">
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\GalaSoft.MvvmLight.Extras.WP8.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.WP8">
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\GalaSoft.MvvmLight.WP8.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Controls, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Drawing, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Interactions, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Live">
+      <HintPath>..\packages\LiveSDK.5.6.3\lib\WindowsPhone81\Microsoft.Live.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Live.Controls">
+      <HintPath>..\packages\LiveSDK.5.6.3\lib\WindowsPhone81\Microsoft.Live.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WPtoolkit.Kinnara.4.2014.06.10\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic.LateBinder, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\sl4-windowsphone71\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Nokia.Graphics.Imaging.Managed, Version=1.2.99.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NokiaImagingSDK.1.2.99\lib\wp8\Nokia.Graphics.Imaging.Managed.dll</HintPath>
+    </Reference>
+    <Reference Include="Sh">
+      <HintPath>..\packages\ShWp.1.0.1\lib\sl4-wp71\Sh.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\LocalRepositoryImpl\LocalRepositoryImpl.csproj">
+      <Project>{DBEE8C0C-307B-46E4-897C-5BACF7274EB1}</Project>
+      <Name>LocalRepositoryImpl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryApi\RepositoryApi.csproj">
+      <Project>{480DA59C-117C-46FA-A883-C289F87F5FD8}</Project>
+      <Name>RepositoryApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceApi\ServiceApi.csproj">
+      <Project>{4B168545-E182-4E5B-8620-4BD6FBDB900E}</Project>
+      <Name>ServiceApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceImpl\ServiceImpl.csproj">
+      <Project>{E2949511-B520-453E-A54E-5BDC4DE64358}</Project>
+      <Name>ServiceImpl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UTravellerModel\UTravellerModel.csproj">
+      <Project>{3F4EC23A-EB56-4903-8C6C-B437FCC80D88}</Project>
+      <Name>UTravellerModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+  <Import Project="..\packages\NokiaImagingSDK.1.2.99\build\wp8\NokiaImagingSDK.targets" Condition="Exists('..\packages\NokiaImagingSDK.1.2.99\build\wp8\NokiaImagingSDK.targets')" />
+</Project>

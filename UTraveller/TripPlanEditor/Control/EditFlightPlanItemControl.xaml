@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="UTraveller.TripPlanEditor.Control.EditFlightPlanItemControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="clr-namespace:UTraveller.Common.Converter"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/CheckBox.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/ToolkitControls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
+            <converter:ReverseVisibilityConverter x:Key="reverseVisibilityConverter" />
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel>
+        <Grid Margin="12,0,0,0">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <CheckBox Name="checkBox" IsChecked="{Binding IsDateEnabled, Mode=TwoWay}" Style="{StaticResource DefaultCheckBoxStyle}">
+                <Ellipse Fill="{Binding MainColor}" Width="50" Height="50"/>
+            </CheckBox>
+            <TextBlock  Grid.Column="1" Foreground="{Binding TextColor}" Text="Flight date" HorizontalAlignment="Left"/>
+        </Grid>
+
+        <TextBlock Foreground="{Binding TextColor}" Margin="10" Text="No flight date has been provided" HorizontalAlignment="Center"
+                   Style="{StaticResource MiddleGrayTextStyle}"
+                   Visibility="{Binding ElementName=checkBox, Path=IsChecked, Converter={StaticResource reverseVisibilityConverter}}"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <toolkit:DatePicker Name="datePicker" Value="{Binding Date, Mode=TwoWay}"
+                                Visibility="{Binding ElementName=checkBox, Path=IsChecked, Converter={StaticResource visibilityConverter}}">
+            </toolkit:DatePicker>
+
+            <toolkit:TimePicker Name="timePicker" Grid.Column="1" Value="{Binding Time, Mode=TwoWay}"
+                                Visibility="{Binding ElementName=checkBox, Path=IsChecked, Converter={StaticResource visibilityConverter}}">
+            </toolkit:TimePicker>
+        </Grid>
+
+        <TextBlock Margin="12,5,5,5" Foreground="{Binding TextColor}" Text="Destination" HorizontalAlignment="Left"/>
+        <TextBox Text="{Binding Destination, Mode=TwoWay}" Margin="12,5,5,5" Foreground="{Binding TextColor}"
+                 Style="{StaticResource DefaultTextBoxStyle}" >
+        </TextBox>
+        
+    </StackPanel>
+</UserControl>

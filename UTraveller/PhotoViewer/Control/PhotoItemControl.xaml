@@ -1,0 +1,43 @@
+﻿<toolkit:FlipViewItem x:Class="UTraveller.PhotoViewer.Control.PhotoItemControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d" Margin="0,-10,2,0">
+    <toolkit:FlipViewItem.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </toolkit:FlipViewItem.Resources>
+    <ScrollViewer Name="scrollViewer" ManipulationMode="Control" 
+        VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+        <StackPanel Name="contentPanel" VerticalAlignment="Center">
+            <ViewportControl x:Name="viewport" MinHeight="450"
+                ManipulationStarted="OnManipulationStarted" ManipulationDelta="OnManipulationDelta"  
+                ManipulationCompleted="OnManipulationCompleted" ViewportChanged="viewport_ViewportChanged"
+                 Margin="0,0,0,0" >
+                <Canvas x:Name="canvas">
+                    <Image x:Name="image" Source="{Binding Image}" Loaded="ImageLoaded" ImageOpened="ImageOpened" ImageFailed="ImageFailed" 
+                    RenderTransformOrigin="0,0" CacheMode="BitmapCache">
+                        <Image.RenderTransform>
+                            <ScaleTransform x:Name="xform"/>
+                        </Image.RenderTransform>
+                    </Image>
+                </Canvas>
+            </ViewportControl>
+
+            <ProgressBar Name="imageLoadProgress" IsIndeterminate="True" Visibility="Collapsed"
+                         Margin="30,0,30,0" Foreground="{Binding TextColor}"/>
+
+            <TextBlock Name="imageLoadStatusText" Style="{StaticResource MiddleTextStyle}" Margin="5"
+                 Foreground="{Binding MainColor}" TextWrapping="Wrap" Text="{Binding ImageLoadStatusText}" Visibility="Collapsed"/>
+            
+            <TextBlock Name="descriptionTextBlock" Style="{StaticResource LargeTextStyle}" Margin="5"
+                 Foreground="{Binding TextColor}" TextWrapping="Wrap" Text="{Binding Text}" Visibility="Collapsed"/>
+        </StackPanel>
+    </ScrollViewer>
+</toolkit:FlipViewItem>

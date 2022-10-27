@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4B168545-E182-4E5B-8620-4BD6FBDB900E}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServiceApi</RootNamespace>
+    <AssemblyName>ServiceApi</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <TargetFrameworkProfile />
+    <DefaultLanguage>en-US</DefaultLanguage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UTraveller\Service\Api\IAppPropertiesService.cs" />
+    <Compile Include="UTraveller\Service\Api\IEventService.cs" />
+    <Compile Include="UTraveller\Service\Api\IFacebookAuthService.cs" />
+    <Compile Include="UTraveller\Service\Api\IFacebookClientService.cs" />
+    <Compile Include="UTraveller\Service\Api\IGeoCoordinateService.cs" />
+    <Compile Include="UTraveller\Service\Api\IImageCompressionService.cs" />
+    <Compile Include="UTraveller\Service\Api\IImageCropService.cs" />
+    <Compile Include="UTraveller\Service\Api\IImageInitializer.cs" />
+    <Compile Include="UTraveller\Service\Api\IImageService.cs" />
+    <Compile Include="UTraveller\Service\Api\ILiveAuthService.cs" />
+    <Compile Include="UTraveller\Service\Api\ITripPlanService.cs" />
+    <Compile Include="UTraveller\Service\Api\IUnSyncEntityRetreiver.cs" />
+    <Compile Include="UTraveller\Service\Api\IMessageService.cs" />
+    <Compile Include="UTraveller\Service\Api\IMicrosoftLiveAuthService.cs" />
+    <Compile Include="UTraveller\Service\Api\IExpenseService.cs" />
+    <Compile Include="UTraveller\Service\Api\INavigationService.cs" />
+    <Compile Include="UTraveller\Service\Api\INetworkConnectionCheckService.cs" />
+    <Compile Include="UTraveller\Service\Api\IParameterContainer.cs" />
+    <Compile Include="UTraveller\Service\Api\IPhotoService.cs" />
+    <Compile Include="UTraveller\Service\Api\IImageTransferService.cs" />
+    <Compile Include="UTraveller\Service\Api\IPhotoUploader.cs" />
+    <Compile Include="UTraveller\Service\Api\IFileExplorerService.cs" />
+    <Compile Include="UTraveller\Service\Api\IRouteFileReader.cs" />
+    <Compile Include="UTraveller\Service\Api\IRouteService.cs" />
+    <Compile Include="UTraveller\Service\Api\ISocialClientAccessToken.cs" />
+    <Compile Include="UTraveller\Service\Api\ISyncService.cs" />
+    <Compile Include="UTraveller\Service\Api\ITaskProgressService.cs" />
+    <Compile Include="UTraveller\Service\Api\ITaskExecutionManager.cs" />
+    <Compile Include="UTraveller\Service\Api\IUserService.cs" />
+    <Compile Include="UTraveller\Service\Api\IWebService.cs" />
+    <Compile Include="UTraveller\Service\Api\IZipExtractService.cs" />
+    <Compile Include="UTraveller\Service\Api\Remote\IPhotoUploadService.cs" />
+    <Compile Include="UTraveller\Service\Api\Remote\IRemoteEventService.cs" />
+    <Compile Include="UTraveller\Service\Api\Remote\IMessageRemoteService.cs" />
+    <Compile Include="UTraveller\Service\Api\Remote\IMoneySpendingRemoteService.cs" />
+    <Compile Include="UTraveller\Service\Api\Remote\IPhotoRemoteService.cs" />
+    <Compile Include="UTraveller\Service\Api\Remote\IRouteRemoteService.cs" />
+    <Compile Include="UTraveller\Service\Api\Remote\ITripPlanRemoteService.cs" />
+    <Compile Include="UTraveller\Service\Api\Remote\WebServiceException.cs" />
+    <Compile Include="UTraveller\Service\Api\TripBackupService.cs" />
+    <Compile Include="UTraveller\Service\Exceptions\EmailExistsException.cs" />
+    <Compile Include="UTraveller\Service\Exceptions\FacebookNotAuthException.cs" />
+    <Compile Include="UTraveller\Service\Exceptions\LimitExceedException.cs" />
+    <Compile Include="UTraveller\Service\Exceptions\TripBackupException.cs" />
+    <Compile Include="UTraveller\Service\Model\BaseFileExplorerRequest.cs" />
+    <Compile Include="UTraveller\Service\Model\RouteInfo.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\Facebook\FacebookAlbum.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\Facebook\FacebookComment.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\Facebook\FacebookPaging.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\Facebook\FacebookComments.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\Facebook\FacebookLikes.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\Facebook\FacebookPostSummary.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\Facebook\FacebookPrivacyType.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\Facebook\FacebookUserProfile.cs" />
+    <Compile Include="UTraveller\Service\Model\FileExtensionType.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\SocialAppData.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\SocialPostData.cs" />
+    <Compile Include="UTraveller\Service\Model\Social\SocialPostImageData.cs" />
+    <Compile Include="UTraveller\Service\Model\TripRestoreResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UTravellerModel\UTravellerModel.csproj">
+      <Project>{3F4EC23A-EB56-4903-8C6C-B437FCC80D88}</Project>
+      <Name>UTravellerModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SharpKml">
+      <HintPath>..\packages\SharpKml.Core.2.0.0\lib\portable-net4+sl5+wp8+win8\SharpKml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <ProjectExtensions />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

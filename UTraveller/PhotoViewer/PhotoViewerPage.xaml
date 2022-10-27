@@ -1,0 +1,361 @@
+﻿<base:BasePhoneApplicationPage
+    x:Class="UTraveller.PhotoViewer.PhotoViewerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:base="clr-namespace:UTraveller.Common.Control"
+    mc:Ignorable="d"
+    xmlns:Sh="clr-namespace:Sh;assembly=Sh"
+    xmlns:converter="clr-namespace:UTraveller.Common.Converter"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False" Background="{Binding BackgroundColor}" OrientationChanged="PageOrientationChanged">
+
+    <base:BasePhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/ToolkitControls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
+
+            <!--<DataTemplate x:Key="PhotoCheckedTilesTemplate">
+                <ViewportControl x:Name="viewport"  
+                ManipulationStarted="OnManipulationStarted" ManipulationDelta="OnManipulationDelta"  
+                             ManipulationCompleted="OnManipulationCompleted" ViewportChanged="viewport_ViewportChanged">
+                    <Canvas x:Name="canvas">
+                        <Image x:Name="TestImage" Source="{Binding Image}"  
+                            RenderTransformOrigin="0,0" CacheMode="BitmapCache"
+                           ImageOpened="OnImageOpened">
+                            <Image.RenderTransform>
+                                <ScaleTransform x:Name="xform"/>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Canvas>
+                </ViewportControl>
+            </DataTemplate>-->
+
+        </ResourceDictionary>
+    </base:BasePhoneApplicationPage.Resources>
+
+    <Grid Background="{Binding BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <toolkit:FlipView Name="eventItemsList" Grid.RowSpan="2" SelectionChanged="Panorama_SelectionChanged"
+                          Tap="EventItemsListTap">
+        </toolkit:FlipView>
+
+        <TextBlock Name="dateLabel" Style="{StaticResource MiddleGrayTextStyle}" Margin="5,0,5,0" Visibility="Visible"
+                   Text="{Binding Date}" Foreground="{Binding TextColor}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+        <StackPanel Name="socialInfoPanel" Height="30" Orientation="Horizontal" HorizontalAlignment="Right"
+                    Tap="FacebookCommentsButtonTap"
+                    Visibility="Visible">
+            <Border Height="30" Width="30" Background="{Binding MainColor}">
+                <Border.OpacityMask>
+                    <ImageBrush ImageSource="/Assets/Icons/heart.png"/>
+                </Border.OpacityMask>
+            </Border>
+            <TextBlock Style="{StaticResource MiddleGrayTextStyle}" Margin="5,0,5,0"
+                       Text="{Binding TotalLikes}" Foreground="{Binding TextColor}" VerticalAlignment="Center"/>
+            <Border Height="30" Width="30" Background="{Binding MainColor}">
+                <Border.OpacityMask>
+                    <ImageBrush ImageSource="/Assets/Icons/message3.png"/>
+                </Border.OpacityMask>
+            </Border>
+            <TextBlock Style="{StaticResource MiddleGrayTextStyle}" Margin="5,0,5,0"
+                       Text="{Binding TotalComments}" Foreground="{Binding TextColor}" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Grid Name="postPanel" Grid.RowSpan="2" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="230"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Border Grid.RowSpan="4" Opacity="0.75" Background="Black"/>
+            <Border Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{Binding BackgroundColor}" BorderBrush="{Binding MainColor}"
+                    BorderThickness="0,0,0,2"/>
+            <StackPanel>
+                <Grid  Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <TextBlock Foreground="{Binding TextColor}" Text="{Binding Path=LocalizedResources.Facebook_Post_Privacy, Source={StaticResource LocalizedStrings}}"
+                                   Margin="5"/>
+                        <toolkit:PickerBox Foreground="{Binding TextColor}"  ItemsSource="{Binding FacebookPrivacyTypes}"
+                            SelectedItem="{Binding SelectedPrivacyType, Mode=TwoWay}">
+                        </toolkit:PickerBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Foreground="{Binding TextColor}" 
+                                   Text="{Binding Path=LocalizedResources.Facebook_Post_Albums, Source={StaticResource LocalizedStrings}}"
+                                   Margin="5"/>
+                        <toolkit:PickerBox Foreground="{Binding TextColor}"
+                             ItemsSource="{Binding Albums}" SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}">
+                        </toolkit:PickerBox>
+                    </StackPanel>
+                    
+                </Grid>
+                <TextBlock Text="{Binding Path=LocalizedResources.Facebook_Post_Comment, Source={StaticResource LocalizedStrings}}" 
+                           Foreground="{Binding TextColor}" Margin="15,0,15,0"/>
+                <TextBox Grid.ColumnSpan="2" Style="{StaticResource DefaultTextBoxStyle}" Foreground="{Binding TextColor}"
+                         Text="{Binding Comment, Mode=TwoWay}" Margin="15,0,15,0" MaxHeight="150"/>
+            </StackPanel>
+
+            <Grid Grid.Row="1" Grid.RowSpan="2"
+                  HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource SmallEllipseButton}" VerticalAlignment="Center"
+                        Command="{Binding PostPhotoCommand}" Tap="OkPostButtonTap">
+                    <ImageBrush ImageSource="/Assets/AppBar/check.png" />
+                </Button>
+
+                <Button Grid.Column="2" Style="{StaticResource SmallEllipseButton}"
+                HorizontalAlignment="Center" Tap="CancelPostButtonTap">
+                    <ImageBrush ImageSource="/Assets/AppBar/close.png" />
+                </Button>
+            </Grid>
+        </Grid>
+
+        <Grid Name="postMessagePanel" Grid.RowSpan="2" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="100"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Border Grid.RowSpan="4" Opacity="0.75" Background="Black"/>
+            <Border Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{Binding BackgroundColor}" BorderBrush="{Binding MainColor}"
+                    BorderThickness="0,0,0,2"/>
+            <StackPanel>
+                <TextBlock Margin="5" Text="{Binding Path=LocalizedResources.Facebook_Post_Privacy, Source={StaticResource LocalizedStrings}}"
+                           Foreground="{Binding TextColor}"/>
+                <toolkit:PickerBox Foreground="{Binding TextColor}" 
+                                   ItemsSource="{Binding FacebookPrivacyTypes}"
+                            SelectedItem="{Binding SelectedMessagePrivacyType, Mode=TwoWay}">
+                </toolkit:PickerBox>
+            </StackPanel>
+
+            <Grid Grid.Row="1" Grid.RowSpan="2"
+                  HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource SmallEllipseButton}" VerticalAlignment="Center"
+                        Command="{Binding PostMessageCommand}">
+                    <ImageBrush ImageSource="/Assets/AppBar/check.png" />
+                </Button>
+
+                <Button Grid.Column="2" Style="{StaticResource SmallEllipseButton}"
+                HorizontalAlignment="Center" Tap="CancelPostButtonTap">
+                    <ImageBrush ImageSource="/Assets/AppBar/close.png" />
+                </Button>
+            </Grid>
+        </Grid>
+
+        <Grid Name="facebookCommentsPanel" Grid.RowSpan="2" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="150"/>
+            </Grid.RowDefinitions>
+            <Border Grid.RowSpan="4" Opacity="0.75" Background="Black"/>
+            <Border Grid.RowSpan="2" Background="{Binding BackgroundColor}" BorderBrush="{Binding MainColor}"
+                    BorderThickness="0,0,0,2"/>
+            <phone:Panorama Margin="0,-10,0,0">
+                <phone:PanoramaItem>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition MinHeight="120"/>
+                            <RowDefinition Height="80" MinHeight="85"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Line Name="commentsDashLine" Grid.Row="1" Grid.RowSpan="2" 
+            X1="0" Y1="0" X2="0" Y2="480" HorizontalAlignment="Center"
+			Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                        <TextBlock Text="Comments" Style="{StaticResource LargeTextStyle}" Grid.ColumnSpan="2"
+                                   Foreground="{Binding TextColor}" VerticalAlignment="Top"  Margin="15,0,0,0"/>
+
+                        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2">
+                            <ItemsControl ItemsSource="{Binding FacebookComments}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid MinHeight="120" Margin="10,0,10,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition MaxHeight="40"/>
+                                                <RowDefinition MaxHeight="35"/>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30"/>
+                                                <ColumnDefinition Width="30"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                        BorderBrush="{Binding MainColor}" Background="{Binding Background}" Margin="7,0,0,0"
+                                                    BorderThickness="2">
+                                                <TextBlock Margin="25,0,0,0" TextWrapping="Wrap" Foreground="{Binding TextColor}"
+                                         Text="{Binding Text}" Style="{StaticResource MiddleTextStyle}" />
+                                            </Border>
+
+                                            <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                                    Text="{Binding From}" Margin="5,0,0,0" Style="{StaticResource MiddleTextStyle}" Foreground="{Binding TextColor}"/>
+
+                                            <Ellipse Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Right"
+                                                 Width="60" Height="60" Stroke="{Binding MainColor}" Fill="{Binding BackgroundColor}" StrokeThickness="2"/>
+                                            <Image Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Right"
+                                                 Stretch="Fill" Width="60" Height="60" Source="{Binding AvatarUrl}">
+                                                <Image.Clip>
+                                                    <EllipseGeometry Center="30,30" RadiusX="28" RadiusY="28"/>
+                                                </Image.Clip>
+                                            </Image>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                              
+                            </ItemsControl>
+                        </ScrollViewer>
+                        <Grid x:Name="commentPanel" Grid.Row="2" Grid.ColumnSpan="2"
+                                 Margin="55,5,10,5">
+                            <TextBox Name="commentTextBox" Style="{StaticResource DefaultTextBoxStyle}" FontSize="16"
+                         Margin="20,5,5,5" Foreground="{Binding TextColor}" Text="{Binding CommentText, Mode=TwoWay}"/>
+                        </Grid>
+
+                        <Button Grid.Row="2" Style="{StaticResource SmallEllipseButton}"
+                            Command="{Binding CommentPostCommand}">
+                            <ImageBrush ImageSource="/Assets/Icons/message3.png" />
+                        </Button>
+
+                    </Grid>
+                </phone:PanoramaItem>
+                <phone:PanoramaItem>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition MinHeight="200"/>
+                            <RowDefinition Height="80" MinHeight="85"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Line Grid.Row="1"  Grid.RowSpan="3"  X1="0" Y1="0" X2="0" Y2="520" HorizontalAlignment="Center" Stretch="Fill"
+			Stroke="{Binding MainColor}" StrokeThickness="2" Visibility="{Binding HasLikes, Converter={StaticResource visibilityConverter}}"/>
+
+                        <TextBlock Text="Likes" Style="{StaticResource LargeTextStyle}" Grid.ColumnSpan="2"
+                                   Foreground="{Binding TextColor}" VerticalAlignment="Top" Margin="15,5,0,0"/>
+
+                        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2">
+                            <ItemsControl ItemsSource="{Binding FacebookLikes}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Height="80" Margin="10,10,10,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.ColumnSpan="2" Background="{Binding BackgroundBrush}" Margin="47,0,0,0"
+                                                    BorderBrush="{Binding MainColor}" BorderThickness="2">
+                                                <TextBlock Margin="30,0,0,0" VerticalAlignment="Center" 
+                                         Text="{Binding From}" Style="{StaticResource LargeTextStyle}" Foreground="{Binding TextColor}" />
+                                            </Border>
+
+                                            <Ellipse Height="60" Width="60" Fill="{Binding BackgroundBrush}"
+                                                   Stroke="{Binding MainColor}" StrokeThickness="2"/>
+                                            <Image Source="{Binding AvatarUrl}" Stretch="Fill" Width="60" Height="60">
+                                                <Image.Clip>
+                                                    <EllipseGeometry Center="30,30" RadiusX="28" RadiusY="28"/>
+                                                </Image.Clip>
+                                            </Image>
+                                        </Grid>
+                                    </DataTemplate>
+
+                                </ItemsControl.ItemTemplate>
+                                
+                            </ItemsControl>
+                        </ScrollViewer>
+
+                        <TextBlock Visibility="{Binding HasNoLikes, Converter={StaticResource visibilityConverter}}"
+                                  Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                    Style="{StaticResource LargeGrayTextStyle}" Foreground="{Binding TextColor}"
+                                   Text="This post has no Likes :("/>
+                    </Grid>
+                </phone:PanoramaItem>
+            </phone:Panorama>
+
+            <Grid Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource SmallEllipseButton}" Visibility="{Binding HasManyComments, Converter={StaticResource visibilityConverter}}"
+                        Command="{Binding PreviousCommentsCommand}">
+                    <ImageBrush ImageSource="/Assets/Icons/back.png" />
+                </Button>
+
+                <Button Grid.Column="1" Style="{StaticResource SmallEllipseButton}"
+                  Tap="CloseCommentsButtonTap">
+                    <ImageBrush ImageSource="/Assets/AppBar/close.png" />
+                </Button>
+
+                <Button Grid.Column="2" Style="{StaticResource SmallEllipseButton}" Visibility="{Binding HasManyComments, Converter={StaticResource visibilityConverter}}"
+                       Command="{Binding NextCommentsCommand}">
+                    <ImageBrush ImageSource="/Assets/Icons/arrow_right.png" />
+                </Button>
+            </Grid>
+
+        </Grid>
+
+        <!--<Sh:AdvancedApplicationBarMenuItem Name="descriptionMenuItem" Text="Write description" Click="WriteDescriptionButtonTap"/>
+        <Sh:AdvancedApplicationBarMenuItem Text="Post To Facebook" Click="PostFacebookButtonTap"/>
+        <Sh:AdvancedApplicationBar>
+     
+        </Sh:AdvancedApplicationBar>-->
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Minimized" IsVisible="True" IsMenuEnabled="True" Opacity="0.5">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Change Description" Click="WriteDescriptionButtonTap"/>
+                <shell:ApplicationBarMenuItem Text="Post to Facebook" Click="PostFacebookButtonTap"/>
+                <shell:ApplicationBarMenuItem Text="View Comments and Likes" Click="ViewCommentsAndLikesTap"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</base:BasePhoneApplicationPage>

@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3F4EC23A-EB56-4903-8C6C-B437FCC80D88}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UTravellerModel</RootNamespace>
+    <AssemblyName>UTravellerModel</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <TargetFrameworkProfile />
+    <DefaultLanguage>en-US</DefaultLanguage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UTraveller\Converter\BitmapImageToBytesConverter.cs" />
+    <Compile Include="UTraveller\Converter\BytesToBitmapImageConverter.cs" />
+    <Compile Include="UTraveller\Converter\HexColorConverter.cs" />
+    <Compile Include="UTraveller\Converter\IConverter.cs" />
+    <Compile Include="UTraveller\Entity\AppPropertiesEntity.cs" />
+    <Compile Include="UTraveller\Entity\AuthenticationRegistryEntity.cs" />
+    <Compile Include="UTraveller\Entity\EventEntity.cs" />
+    <Compile Include="UTraveller\Entity\FacebookMessagePostEntity.cs" />
+    <Compile Include="UTraveller\Entity\FacebookPhotoPostEntity.cs" />
+    <Compile Include="UTraveller\Entity\MessageEntity.cs" />
+    <Compile Include="UTraveller\Entity\MoneySpendingEntity.cs" />
+    <Compile Include="UTraveller\Entity\PhotoOfPushpinEntity.cs" />
+    <Compile Include="UTraveller\Entity\PushpinEntity.cs" />
+    <Compile Include="UTraveller\Entity\RouteEntity.cs" />
+    <Compile Include="UTraveller\Entity\RoutePushpinEntity.cs" />
+    <Compile Include="UTraveller\Entity\UserEntity.cs" />
+    <Compile Include="UTraveller\Mapper\AppPropertiesMapper.cs" />
+    <Compile Include="UTraveller\Mapper\BaseUserRemoteModelMapper.cs" />
+    <Compile Include="UTraveller\Mapper\EventModelMapper.cs" />
+    <Compile Include="UTraveller\Mapper\EventRemoteModelMapper.cs" />
+    <Compile Include="UTraveller\Mapper\IModelMapper.cs" />
+    <Compile Include="UTraveller\Mapper\MessageMapper.cs" />
+    <Compile Include="UTraveller\Mapper\MessageRemoteModelMapper.cs" />
+    <Compile Include="UTraveller\Mapper\MoneySpendingMapper.cs" />
+    <Compile Include="UTraveller\Mapper\MoneySpendingRemoteModelMapper.cs" />
+    <Compile Include="UTraveller\Mapper\PhotoModelMapper.cs" />
+    <Compile Include="UTraveller\Mapper\PhotoRemoteModelMapper.cs" />
+    <Compile Include="UTraveller\Mapper\PushpinModelMapper.cs" />
+    <Compile Include="UTraveller\Model\RouteCoordinate.cs" />
+    <Compile Include="UTraveller\Mapper\RouteMapper.cs" />
+    <Compile Include="UTraveller\Mapper\RoutePushpinMapper.cs" />
+    <Compile Include="UTraveller\Mapper\RouteRemoteModelMapper.cs" />
+    <Compile Include="UTraveller\Mapper\UserMapper.cs" />
+    <Compile Include="UTraveller\Mapper\UserRemoteModelMapper.cs" />
+    <Compile Include="UTraveller\Mapper\WritablePropertiesOnlyResolver.cs" />
+    <Compile Include="UTraveller\Model\AppProperties.cs" />
+    <Compile Include="UTraveller\Model\BaseModel.cs" />
+    <Compile Include="UTraveller\Model\ErrorCode.cs" />
+    <Compile Include="UTraveller\Model\IDateItem.cs" />
+    <Compile Include="UTraveller\Model\IIdentifiedModel.cs" />
+    <Compile Include="UTraveller\Model\IPushpinItem.cs" />
+    <Compile Include="UTraveller\Model\Message.cs" />
+    <Compile Include="UTraveller\Model\RoutePolygon.cs" />
+    <Compile Include="UTraveller\Model\RoutePushpin.cs" />
+    <Compile Include="UTraveller\Model\CurrencyType.cs" />
+    <Compile Include="UTraveller\Model\File.cs" />
+    <Compile Include="UTraveller\Model\MoneySpending.cs" />
+    <Compile Include="UTraveller\Model\MoneySpendingCategory.cs" />
+    <Compile Include="UTraveller\Model\Photo.cs" />
+    <Compile Include="UTraveller\Model\Event.cs" />
+    <Compile Include="UTraveller\IBaseEntity.cs" />
+    <Compile Include="UTraveller\Entity\PhotoEntity.cs" />
+    <Compile Include="UTraveller\Model\PhotoPushpin.cs" />
+    <Compile Include="UTraveller\Model\Route.cs" />
+    <Compile Include="UTraveller\Model\User.cs" />
+    <Compile Include="UTraveller\Remote\AccessTokenRemoteModel.cs" />
+    <Compile Include="UTraveller\Remote\BaseRemoteModel.cs" />
+    <Compile Include="UTraveller\Remote\BaseUserRemoteModel.cs" />
+    <Compile Include="UTraveller\Remote\ErrorRemoteModel.cs" />
+    <Compile Include="UTraveller\Remote\EventRemoteModel.cs" />
+    <Compile Include="UTraveller\Remote\MessageRemoteModel.cs" />
+    <Compile Include="UTraveller\Remote\MoneySpendingRemoteModel.cs" />
+    <Compile Include="UTraveller\Remote\PhotoRemoteModel.cs" />
+    <Compile Include="UTraveller\Remote\RemoteModel.cs" />
+    <Compile Include="UTraveller\Remote\RouteRemoteModel.cs" />
+    <Compile Include="UTraveller\Remote\UserRemoteModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resource\Icons\message.png" />
+    <Content Include="Resource\TempImage\OnePixelImg.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <ProjectExtensions />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

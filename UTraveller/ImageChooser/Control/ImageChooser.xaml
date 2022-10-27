@@ -1,0 +1,105 @@
+﻿<base:BasePhoneApplicationPage x:Class="UTraveller.PhotoViewer.Control.ImageChooser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:photoModel="clr-namespace:UTraveller.PhotoViewer.Model"
+    xmlns:c4fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:appBar="clr-namespace:AppBarUtils;assembly=AppBarUtils" 
+    xmlns:base="clr-namespace:UTraveller.Common.Control"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    Title="Images" shell:SystemTray.IsVisible="False">
+    <base:BasePhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/PhotoViewerStyle.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="GroupHeader">
+                <Grid Height="80">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                              Style="{StaticResource DefaultCheckBoxStyle}" 
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}"
+                              Tap="SelectAllPhotosTapped" Command="{Binding CheckAllThumbnailsCommand}">
+                        <Ellipse Fill="{Binding MainColor}" Width="50" Height="50"/>
+                    </CheckBox>
+
+
+                    <Button Grid.Column="2" Tap="PhotosInDetailsTapped" Command="{Binding ShowDetailedImagesCommand}"
+                            Style="{StaticResource SmallEllipseButton}">
+                        <ImageBrush ImageSource="/Assets/Icons/image.png" />
+                    </Button>
+
+                    <TextBlock Grid.Column="1" Text="{Binding Month}" 
+                               Foreground="{Binding TextColor}" 
+                               FontSize="24"
+                               Padding="2"                                
+                               FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center" />
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+
+    </base:BasePhoneApplicationPage.Resources>
+
+    <Grid Background="{Binding BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--<ProgressBar VerticalAlignment="Top" Margin="10,5,10,5" IsIndeterminate="True"/>-->
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="addButton" Style="{StaticResource SmallEllipseButton}" HorizontalAlignment="Left"
+                  Command="{Binding ChooseImagesCommand}">
+                <ImageBrush ImageSource="/Assets/AppBar/check.png" />
+            </Button>
+
+            <Button Style="{StaticResource SmallEllipseButton}" HorizontalAlignment="Right"
+                Tap="CloseButtonClick" Margin="15,0,0,0">
+                <ImageBrush ImageSource="/Assets/AppBar/close.png" />
+            </Button>
+        </StackPanel>
+
+        <phone:Pivot Name="ImagesPivot" Margin="5" ItemsSource="{Binding ImagesCollection}" SelectionChanged="ImagesListSelectionChanged">
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding FolderName}" FontSize="45" Foreground="{Binding TextColor}"/>
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+            <phone:Pivot.ItemTemplate>
+                <DataTemplate>
+                    <phone:LongListSelector Grid.Row="1"
+                                ItemsSource="{Binding Images}"
+                                ItemTemplate="{StaticResource PhotoCheckedTilesTemplate}"                     
+                                GroupHeaderTemplate="{StaticResource GroupHeader}"
+                                JumpListStyle="{StaticResource JumpListStyle}" 
+                                IsGroupingEnabled="True"
+                                LayoutMode="Grid" 
+                                GridCellSize="105,105"/>
+                </DataTemplate>
+            </phone:Pivot.ItemTemplate>
+        </phone:Pivot>
+
+    </Grid>
+
+
+</base:BasePhoneApplicationPage>

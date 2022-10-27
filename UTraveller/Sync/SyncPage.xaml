@@ -1,0 +1,186 @@
+﻿<base:BasePhoneApplicationPage
+    x:Class="UTraveller.Sync.SyncPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:UTraveller.Sync"
+    xmlns:converter="clr-namespace:UTraveller.Common.Converter"
+    xmlns:base="clr-namespace:UTraveller.Common.Control"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <base:BasePhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/CheckBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
+            
+            <DataTemplate x:Key="EventTimeLineItemTemplate">
+                <Grid Width="89" Height="89" Margin="3" Tag="{Binding Entity}" Tap="TimeLineItemTap">
+                    <Border Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="{Binding MainColor}"/>
+                    <Border Margin="2" Background="{Binding MainColor}" Width="50" Height="50">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="/Assets/Icons/image.png" />
+                        </Border.OpacityMask>
+                    </Border>
+                </Grid>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="PhotoTimeLineItemTemplate">
+                <Image Source="{Binding Entity.Thumbnail}" Width="89" Height="89" Margin="3" Tag="{Binding Entity}"
+                       Tap="TimeLineItemTap">
+                </Image>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MessageTimeLineItemTemplate">
+                <Grid Width="89" Height="89" Margin="3" Tag="{Binding Entity}" Tap="TimeLineItemTap">
+                    <Border Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="{Binding MainColor}"/>
+                    <Border Margin="2" Background="{Binding MainColor}" Width="50" Height="50">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="/Assets/Icons/message3.png" />
+                        </Border.OpacityMask>
+                    </Border>
+                </Grid>              
+            </DataTemplate>
+
+            <DataTemplate x:Key="MoneySpendingTimeLineItemTemplate">
+                <Grid Width="89" Height="89" Margin="3" Tag="{Binding Entity}" Tap="TimeLineItemTap">
+                    <Border Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="{Binding MainColor}"/>
+                    <Border Margin="2" Background="{Binding MainColor}" Width="50" Height="50">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="/Assets/Icons/money.png" />
+                        </Border.OpacityMask>
+                    </Border>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="RouteTimeLineItemTemplate">
+                <Grid Width="89" Height="89" Margin="3" Tag="{Binding Entity}" Tap="TimeLineItemTap">
+                    <Border Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="{Binding MainColor}"/>
+                    <Border Margin="2" Background="{Binding MainColor}" Width="50" Height="50">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="/Assets/Icons/marker.png" />
+                        </Border.OpacityMask>
+                    </Border>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TripPlanTimeLineItemTemplate">
+                <Grid Width="89" Height="89" Margin="3" Tag="{Binding Entity}" Tap="TimeLineItemTap">
+                    <Border Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="{Binding MainColor}"/>
+                    <Border Margin="2" Background="{Binding MainColor}" Width="45" Height="45">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="/Assets/Icons/calendar.png" />
+                        </Border.OpacityMask>
+                    </Border>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TimeLineDataTemplate">
+                <local:SyncListTemplateSelector Content="{Binding}" HorizontalContentAlignment="Stretch"
+                    local:SyncListTemplateSelector.EventDataTemplate="{StaticResource EventTimeLineItemTemplate}"
+                    local:SyncListTemplateSelector.PhotoDataTemplate="{StaticResource PhotoTimeLineItemTemplate}"
+                    local:SyncListTemplateSelector.MessageDataTemplate="{StaticResource MessageTimeLineItemTemplate}"
+                    local:SyncListTemplateSelector.MoneySpendingDataTemplate="{StaticResource MoneySpendingTimeLineItemTemplate}"                                                
+                    local:SyncListTemplateSelector.RouteDataTemplate="{StaticResource RouteTimeLineItemTemplate}"
+                    local:SyncListTemplateSelector.TripPlanDataTemplate="{StaticResource TripPlanTimeLineItemTemplate}">
+                </local:SyncListTemplateSelector>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </base:BasePhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="{Binding BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="20"
+                                Visibility="{Binding HasNoSyncItems, Converter={StaticResource visibilityConverter}}">
+            <Border Height="250" Width="250"
+                            Opacity="0.2" Background="{Binding MainColor}">
+                <Border.OpacityMask>
+                    <ImageBrush ImageSource="/Assets/Images/device_sync.png"/>
+                </Border.OpacityMask>
+            </Border>
+            <TextBlock Style="{StaticResource MiddleTextStyle}" HorizontalAlignment="Center"
+                                   TextWrapping="Wrap" Margin="10" Opacity="0.2" Foreground="{Binding TextColor}"
+                                   Text="All items of this trip are already saved in the Cloud" />
+            <TextBlock Style="{StaticResource SmallTextStyle}" HorizontalAlignment="Center"
+                                   TextWrapping="Wrap" Margin="2" Opacity="0.2" Foreground="{Binding TextColor}"
+                                   Text="You can tap on Sync button to synchronize manually you trip with the Cloud" />
+        </StackPanel>
+        
+        <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"
+                   Text="items to synchronize with cloud" Style="{StaticResource LargeTextStyle}"
+                   Foreground="{Binding TextColor}"/>
+
+        <Line Grid.Row="1" Grid.RowSpan="2" 
+              X1="10" Y1="0" X2="10" Y2="200" Stretch="UniformToFill" HorizontalAlignment="Center"
+			  Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+        <Button x:Name="addButton" Style="{StaticResource EllipseButton}"
+                Command="{Binding SyncCommand}">
+            <ImageBrush ImageSource="/Assets/Icons/sync3.png" />
+        </Button>
+
+        <phone:LongListSelector Grid.Row="1" Grid.ColumnSpan="2" Margin="0,15,0,0"
+                               LayoutMode="List" IsGroupingEnabled="False"
+                               ItemsSource="{Binding UnSyncEntities}">
+
+            <phone:LongListSelector.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5,0,5,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Ellipse Fill="{Binding BackgroundColor}" StrokeThickness="2" Stroke="{Binding MainColor}"
+                                 Width="40" Height="40"/>
+                        <Border Background="{Binding MainColor}" Width="30" Height="30">
+                            <Border.OpacityMask>
+                                <ImageBrush ImageSource="{Binding SyncTypeImage}" />
+                            </Border.OpacityMask>
+                        </Border>
+                        <TextBlock Grid.Column="1" Text="{Binding SyncTypeText}" Style="{StaticResource TimeLineTextStyle}"
+                                   Foreground="{Binding TextColor}"/>
+
+                        <phone:LongListSelector Grid.Column="1" Grid.Row="1" ItemsSource="{Binding}"
+                                                ItemTemplate="{StaticResource TimeLineDataTemplate}"
+                                                LayoutMode="Grid" IsGroupingEnabled="False" GridCellSize="95, 95">
+                        </phone:LongListSelector>
+                    </Grid>
+                </DataTemplate>
+            </phone:LongListSelector.ItemTemplate>
+        </phone:LongListSelector>
+
+        <Button Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                Style="{StaticResource SmallEllipseButton}"
+                Tap="CloseButtonTap">
+            <ImageBrush ImageSource="/Assets/AppBar/close.png" />
+        </Button>
+
+    </Grid>
+
+</base:BasePhoneApplicationPage>

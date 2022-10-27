@@ -1,0 +1,459 @@
+﻿<base:BasePhoneApplicationPage
+    x:Class="UTraveller.Map.EventMapPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps" 
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:appBar="clr-namespace:AppBarUtils;assembly=AppBarUtils"       
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:maptk="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:c4fControls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:local="clr-namespace:UTraveller.EventMap.Control"
+    xmlns:sh="clr-namespace:Sh;assembly=Sh"
+    xmlns:dp="clr-namespace:UTraveller.EventMap"
+    xmlns:base="clr-namespace:UTraveller.Common.Control"
+    xmlns:converter="clr-namespace:UTraveller.Common.Converter"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False" OrientationChanged="PageOrientationChanged">
+
+    <base:BasePhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/CheckBox.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
+            
+            <Storyboard x:Name="showPhotosPanelStoryboard">
+                <DoubleAnimation x:Name="showPhotosPanelAnimation" Storyboard.TargetName="photosPanel" 
+                                 Storyboard.TargetProperty="Width" From="0" To="122"
+                                 Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="photosOpacityAnimation" Storyboard.TargetName="photosListBox" 
+                                 Storyboard.TargetProperty="Opacity" From="0" To="1"  BeginTime="0:0:0.2" Duration="0:0:0.2"/>
+            </Storyboard>
+
+            <Storyboard x:Name="showPlanItemsLegendPanelStoryboard">
+                <DoubleAnimation x:Name="showPlanItemsLegendPanelAnimation" Storyboard.TargetName="planItemsLegendPanel" 
+                                 Storyboard.TargetProperty="Width" From="0" To="220"
+                                 Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="planItemsLegendOpacityAnimation" Storyboard.TargetName="planItemsLegendListBox" 
+                                 Storyboard.TargetProperty="Opacity" From="0" To="1"  BeginTime="0:0:0.2" Duration="0:0:0.2"/>
+            </Storyboard>
+
+            <DataTemplate x:Key="PhotoTilesTemplate">
+                <RadioButton Margin="4" Style="{StaticResource SimpleImageRadioButton}"
+                             IsChecked="{Binding IsInPushpin}" Command="{Binding ShowOnMapCommand}">
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="Delete from Map" Command="{Binding DeleteFromMapCommand}"/>
+                            <toolkit:MenuItem Header="Delete" Command="{Binding DeleteTimeLineItemCommand}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                    <Border BorderBrush="{Binding MainColor}" Height="108" Width="108" BorderThickness="2">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding DateItem.Thumbnail}" Stretch="UniformToFill"/>
+                        </Border.Background>
+                    </Border>
+                </RadioButton>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MessageTilesTemplate">
+                <RadioButton Margin="4" Style="{StaticResource SimpleImageRadioButton}"
+                             IsChecked="{Binding IsInPushpin}" Command="{Binding ShowOnMapCommand}"
+                            >
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="Delete from Map" Command="{Binding DeleteFromMapCommand}"/>
+                            <toolkit:MenuItem Header="Delete" Command="{Binding DeleteTimeLineItemCommand}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                    <Border BorderBrush="{Binding MainColor}" Height="108" Width="108" MaxHeight="108" MaxWidth="108"
+                            BorderThickness="2">
+                        <TextBlock Text="{Binding DateItem.Text}" Foreground="{Binding TextColor}" Style="{StaticResource SmallTextStyle}" 
+                               Margin="5" TextWrapping="Wrap"/>
+                    </Border>
+
+                </RadioButton>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TimeLineDataTemplate">
+                <local:EventMapTimeLineItemsTemplateSelector Content="{Binding}" HorizontalContentAlignment="Stretch"
+                    local:EventMapTimeLineItemsTemplateSelector.PhotoDataTemplate="{StaticResource PhotoTilesTemplate}"
+                    local:EventMapTimeLineItemsTemplateSelector.MessageDataTemplate="{StaticResource MessageTilesTemplate}">
+                </local:EventMapTimeLineItemsTemplateSelector>
+            </DataTemplate>
+
+            <DataTemplate x:Key="PlanItemsLegendDataTemplate">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="55"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" Style="{StaticResource ColoredEllipseCheckBoxStyle}">
+                    </CheckBox>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Day}" Style="{StaticResource MiddleTextStyle}" Margin="5" 
+                                    Foreground="{Binding TextColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    
+                </Grid>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="PushpinControlTemplate">
+                <maptk:Pushpin Tag="{Binding}" GeoCoordinate="{Binding Coordinate, Mode=TwoWay}" 
+                                PositionOrigin="0.5,1" Visibility="{Binding Visibility}" Tap="PushPinTap">
+                    <maptk:Pushpin.Template>
+                        <ControlTemplate>
+                            <Grid Height="88" Width="72">
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu>
+                                        <toolkit:MenuItem Header="View Items" Command="{Binding ViewTimeLineItemsCommand}"/>
+                                        <toolkit:MenuItem Header="Add Photos" Command="{Binding AddPhotosCommand}"/>
+                                        <toolkit:MenuItem Header="Add Messages" Command="{Binding AddMessagesCommand}"/>
+                                        <toolkit:MenuItem Header="Delete" Command="{Binding DeletePushpinCommand}"/>
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+
+                                <Path Data="M108.332,8.10354 C164.666,8.10354 210.332,53.7696 210.332,110.104 C210.332,192.096 108.332,261.907 108.332,261.907 C108.332,261.907 6.332,192.096 6.332,110.104 C6.332,53.7696 51.9981,8.10355 108.332,8.10355 z"
+		                              Fill="{Binding IconBackground}" Height="86.5" Width="70" Stretch="Fill" 
+                                      Stroke="{Binding MainColor}" StrokeThickness="2" Opacity="0.85"
+		                              HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="False" />
+
+                                <Ellipse Fill="{Binding Background}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+		                                 Height="60" Width="60" Margin="5,5,5,21"
+                                         Visibility="{Binding IsPhoto, Converter={StaticResource visibilityConverter}}"/>
+
+                                <Border Background="{Binding MainColor}"
+                                        HorizontalAlignment="Center" VerticalAlignment="Center" 
+		                                Height="50" Width="50" Margin="5,5,5,21"
+                                        Visibility="{Binding IsMessage, Converter={StaticResource visibilityConverter}}">
+                                    <Border.OpacityMask>
+                                        <ImageBrush ImageSource="{Binding Icon}"/>
+                                    </Border.OpacityMask>
+                                </Border>
+
+                                <TextBlock HorizontalAlignment="Center"  Text="{Binding TimeLineItemsQuantity}" VerticalAlignment="Center" 
+		                                    FontSize="10" Foreground="{Binding TextColor}" Margin="33,65,34,6"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </maptk:Pushpin.Template>
+                </maptk:Pushpin>
+            </DataTemplate>
+
+            <ControlTemplate x:Key="RoutePushpinControlTemplate">
+                <Grid>
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="Create Plan Item" Command="{Binding CreatePlanItemCommand}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                    <Image Source="{Binding Thumbnail}">
+                    </Image>
+                    <Border Background="{Binding Color}">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="{Binding Thumbnail}"/>
+                        </Border.OpacityMask>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="PlanItemPushpinTemplate">
+                <Grid Height="83" Width="83">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="Edit" Command="{Binding EditPlanItemCommand}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                    <Ellipse Fill="{Binding BackgroundColor}" Stroke="{Binding MainColor}" 
+                             HorizontalAlignment="Center" VerticalAlignment="Center" StrokeThickness="2"  
+		                     Opacity="0.85" Height="59" Width="59"/>
+
+                    <Border Background="{Binding MainColor}" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center" 
+		                    Height="40" Width="40">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="{Binding Icon}"/>
+                        </Border.OpacityMask>
+                    </Border>
+
+                    <Ellipse Grid.Row="1" Fill="{Binding Color}" Stroke="{Binding StrokeColor}"
+                             HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+		                     StrokeThickness="1" Height="20" Width="20"/>
+                </Grid>
+            </ControlTemplate>
+
+            <Storyboard x:Name="mapHoldEllipseStoryboard" FillBehavior="Stop">
+                <DoubleAnimation Storyboard.TargetName="mapHoldEllipse" 
+                                 Storyboard.TargetProperty="Width" From="0" To="200" 
+                                 BeginTime="0:0:0.3" Duration="0:0:0.9"/>
+                <DoubleAnimation Storyboard.TargetName="mapHoldEllipse" 
+                                 Storyboard.TargetProperty="Height" From="0" To="200" 
+                                 BeginTime="0:0:0.3" Duration="0:0:0.9"/>
+            </Storyboard>
+
+            <Storyboard x:Name="currentLocationEllipseStoryboard" AutoReverse="True" 
+                        RepeatBehavior="Forever">
+                <DoubleAnimation Storyboard.TargetName="currentLocationEllipse" 
+                                 Storyboard.TargetProperty="Width" From="20" To="60" Duration="0:0:1.5"/>
+                <DoubleAnimation Storyboard.TargetName="currentLocationEllipse" 
+                                 Storyboard.TargetProperty="Height" From="20" To="60" Duration="0:0:1.5"/>
+            </Storyboard>
+
+            <Storyboard x:Name="panelButtonsStoryboard1" SpeedRatio="2">
+              
+                <DoubleAnimation x:Name="panelLineAnimation1" Storyboard.TargetName="mapPanelLine1" 
+                                 Storyboard.TargetProperty="Y2" From="0" To="0" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="panelButtonAnimation1" Storyboard.TargetName="mapPanelButton1" 
+                                 Storyboard.TargetProperty="Width" From="0" To="0" Duration="0:0:0.1"/>
+            </Storyboard>
+
+            <Storyboard x:Name="panelButtonsStoryboard2" SpeedRatio="2">
+
+                <DoubleAnimation x:Name="panelLineAnimation2" Storyboard.TargetName="mapPanelLine2" 
+                                 Storyboard.TargetProperty="Y2" From="0" To="0" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="panelButtonAnimation2" Storyboard.TargetName="mapPanelButton2" 
+                                 Storyboard.TargetProperty="Width" From="0" To="0" Duration="0:0:0.1"/>
+            </Storyboard>
+
+            <Storyboard x:Name="mapOptionStoryboard" SpeedRatio="2">
+                <DoubleAnimation x:Name="mapOptionLineAnimation1" Storyboard.TargetName="mapOptionLine1" 
+                                 Storyboard.TargetProperty="Y2" From="0" To="40" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="mapOptionButtonAnimation1" Storyboard.TargetName="mapOptionButton1" 
+                                 Storyboard.TargetProperty="Width" From="0" To="50" Duration="0:0:0.1"/>
+
+                <DoubleAnimation x:Name="mapFilterLineAnimation1" Storyboard.TargetName="mapFilterLine1" 
+                                 Storyboard.TargetProperty="X2" From="0" To="40" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="mapFilterCheckBoxAnimation1" Storyboard.TargetName="mapFilterCheckBox1" 
+                                 Storyboard.TargetProperty="Height" From="0" To="50" Duration="0:0:0.1"/>
+
+                <DoubleAnimation x:Name="mapFilterLineAnimation2" Storyboard.TargetName="mapFilterLine2" 
+                                 Storyboard.TargetProperty="X2" From="0" To="40" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="mapFilterCheckBoxAnimation2" Storyboard.TargetName="mapFilterCheckBox2" 
+                                 Storyboard.TargetProperty="Height" From="0" To="50" Duration="0:0:0.1"/>
+
+                <DoubleAnimation x:Name="mapFilterLineAnimation3" Storyboard.TargetName="mapFilterLine3" 
+                                 Storyboard.TargetProperty="X2" From="0" To="40" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="mapFilterCheckBoxAnimation3" Storyboard.TargetName="mapFilterCheckBox3" 
+                                 Storyboard.TargetProperty="Height" From="0" To="50" Duration="0:0:0.1"/>
+
+                <DoubleAnimation x:Name="mapPanelLineAnimation1" Storyboard.TargetName="mapPanelLine1" 
+                                 Storyboard.TargetProperty="Y2" From="0" To="0" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="mapPanelButtonAnimation1" Storyboard.TargetName="mapPanelButton1" 
+                                 Storyboard.TargetProperty="Width" From="0" To="0" Duration="0:0:0.1"/>
+
+                <DoubleAnimation x:Name="mapPanelLineAnimation2" Storyboard.TargetName="mapPanelLine2" 
+                                 Storyboard.TargetProperty="Y2" From="0" To="0" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="mapPanelButtonAnimation2" Storyboard.TargetName="mapPanelButton2" 
+                                 Storyboard.TargetProperty="Width" From="0" To="0" Duration="0:0:0.1"/>
+            </Storyboard>
+
+            <shell:ApplicationBar x:Key="mainAppBar" Mode="Minimized" IsVisible="True" 
+                                  IsMenuEnabled="True" Opacity="0.5">
+                <shell:ApplicationBar.MenuItems>
+                    <shell:ApplicationBarMenuItem Text="Edit" Click="EditModeMenuItemTap"/>
+                    <shell:ApplicationBarMenuItem Text="Routes" Click="RoutesMenuItemTap"/>
+                    <shell:ApplicationBarMenuItem Text="Help" Click="HelpMenuItemTap"/>
+                </shell:ApplicationBar.MenuItems>
+            </shell:ApplicationBar>
+
+            <shell:ApplicationBar x:Key="editAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.5">
+                <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/check.png" Text="Apply"
+                                            Click="ApplyEditButtonTap" />
+            </shell:ApplicationBar>
+        </ResourceDictionary>
+
+    </base:BasePhoneApplicationPage.Resources>
+    <Border x:Name="mapBorder" BorderThickness="2.3">
+        <Grid>
+
+            <Controls:Map Name="map" Hold="MapHold" dp:MapPushPinDependency.ItemsSource="{Binding Pushpins}"
+                          dp:RoutePushpinDependency.ItemsSource="{Binding RoutePushpins}"
+                          dp:PlanItemPushpinDependency.ItemsSource="{Binding PlanItemPushpins}"
+                      CenterChanged="MapCenterChanged" MouseLeftButtonDown="MapMouseLeftButtonDown" 
+                      ManipulationCompleted="MapManipulationCompleted" Loaded="MapLoaded">
+                <Controls:Map.Layers>
+                    <Controls:MapLayer>
+                        <Controls:MapOverlay PositionOrigin="0.5, 0.5">
+                            <Ellipse x:Name="mapHoldEllipse" Width="0" Height="0" Opacity="0.4"
+                                     Fill="{Binding MainColor}">
+                            </Ellipse>
+                        </Controls:MapOverlay>
+                        <!--<Controls:MapOverlay PositionOrigin="0.5, 1">
+                            <Grid Height="270" Width="200" Visibility="Collapsed">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="70"/>
+                                </Grid.RowDefinitions>
+                                <Line Grid.Row="1" X1="100" Y1="0"  X2="100" Y2="45" Opacity="0.7"
+			                        Stroke="{Binding MainColor}" StrokeDashArray="1, 1" StrokeThickness="3"/>
+                                <Ellipse Fill="{Binding BackgroundColor}" Height="200" Width="200" StrokeThickness="2"
+			                         VerticalAlignment="Top" Stroke="{Binding MainColor}" Opacity="0.7"/>
+                                <TextBlock MaxWidth="150" MaxHeight="100" Foreground="{Binding TextColor}" FontSize="12" TextWrapping="Wrap" 
+			                        VerticalAlignment="Center" HorizontalAlignment="Center"
+			                        Text="{Binding Pushpin.Description}"/>
+                            </Grid>
+                        </Controls:MapOverlay>-->
+                    </Controls:MapLayer>
+                    <Controls:MapLayer>
+                        <Controls:MapOverlay PositionOrigin="0.5, 0.5">
+                            <Grid Visibility="Collapsed" Width="120" Height="120" >
+                                <Ellipse x:Name="currentLocationEllipse" Width="20" Height="20" Opacity="0.4"
+                                     Fill="{Binding MainColor}">
+                                </Ellipse>
+                                <Ellipse Width="20" Height="20" Fill="{Binding MainColor}">
+                                </Ellipse>
+                            </Grid>
+                        </Controls:MapOverlay>
+                    </Controls:MapLayer>
+                </Controls:Map.Layers>
+              
+                <maptk:MapExtensions.Children>
+                    <maptk:MapItemsControl Name="StoresMapItemsControl" ItemTemplate="{StaticResource PushpinControlTemplate}">
+    
+                    </maptk:MapItemsControl>
+                    <maptk:MapItemsControl Name="RoutePushpins">
+                        <maptk:MapItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <maptk:Pushpin Tag="{Binding}" Visibility="{Binding Visibility}"
+                                           GeoCoordinate="{Binding Pushpin.Coordinate, Mode=TwoWay}" 
+                                           PositionOrigin="0.5,1"
+                                           Tap="RoutePushPinTap"
+                                           Template="{StaticResource RoutePushpinControlTemplate}">
+                                </maptk:Pushpin>
+                            </DataTemplate>
+                        </maptk:MapItemsControl.ItemTemplate>
+                    </maptk:MapItemsControl>
+                    
+                    <maptk:MapItemsControl Name="PlanItemPushpins">
+                        <maptk:MapItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <maptk:Pushpin Tag="{Binding}" Visibility="{Binding Visibility}"
+                                           GeoCoordinate="{Binding BasePlanItem.Coordinate}" 
+                                           PositionOrigin="0.5,1"
+                                           Tap="PlanItemPushPinTap"
+                                           Template="{StaticResource PlanItemPushpinTemplate}">
+                                </maptk:Pushpin>
+                            </DataTemplate>
+                        </maptk:MapItemsControl.ItemTemplate>
+                    </maptk:MapItemsControl>
+                </maptk:MapExtensions.Children>
+
+            </Controls:Map>
+
+            <Grid Name="mapToolbarPanel" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="40"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+                <Button Style="{StaticResource TransparentEllipseButton}" Tap="MapOptionButtonTap">
+                    <ImageBrush ImageSource="/Assets/Icons/view.png" />
+                </Button>
+                
+                <!-- Current position -->
+                <Line Name="mapOptionLine1" Grid.Row="1"
+                    X1="25" Y1="0" X2="25" Y2="0"
+			          Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                <Button Name="mapOptionButton1" Grid.Row="2" Style="{StaticResource TransparentEllipseButton}"
+                       Width="0" Tap="MyLocationButtonTap">
+                    <ImageBrush ImageSource="/Assets/AppBar/target.png" />
+                </Button>
+                
+                <!-- Map Filter -->
+
+                <Line Name="mapFilterLine1" Grid.Column="1"
+                      X1="0" Y1="25" X2="0" Y2="25"
+			          Stroke="{Binding MainColor}" StrokeThickness="2"/>
+                <CheckBox Name="mapFilterCheckBox1" Grid.Column="2" Style="{StaticResource EllipseIconCheckBoxStyle}" 
+                          Height="0" IsChecked="{Binding IsPhotoPushpinsVisible, Mode=TwoWay}" Tap="FilterCheckBoxTap">
+                    <ImageBrush ImageSource="/Assets/Icons/marker.png"/>
+                </CheckBox>
+                <Line Name="mapPanelLine1" Grid.Row="1" Grid.Column="2"
+                     X1="25" Y1="0" X2="25" Y2="0"
+			         Stroke="{Binding MainColor}" StrokeThickness="2"/>
+                <Button Name="mapPanelButton1" Grid.Row="2" Grid.Column="2" Style="{StaticResource TransparentEllipseButton}"
+                       Width="0" Tap="ShowPhotosPanelButtonTap" >
+                    <ImageBrush ImageSource="/Assets/Icons/list.png" />
+                </Button>
+
+
+                <Line Name="mapFilterLine2" Grid.Column="3"
+                      X1="0" Y1="25" X2="0" Y2="25"
+			          Stroke="{Binding MainColor}" StrokeThickness="2"/>
+                <CheckBox Name="mapFilterCheckBox2" Grid.Column="4" Style="{StaticResource EllipseIconCheckBoxStyle}" 
+                          Height="0" IsChecked="{Binding IsPlanItemPushpinsVisible, Mode=TwoWay}" Tap="FilterCheckBoxTap">
+                    <ImageBrush ImageSource="/Assets/Icons/clock.png"/>
+                </CheckBox>
+                <Line Name="mapPanelLine2" Grid.Row="1" Grid.Column="4"
+                     X1="25" Y1="0" X2="25" Y2="0"
+			         Stroke="{Binding MainColor}" StrokeThickness="2"/>
+                <Button Name="mapPanelButton2" Grid.Row="2" Grid.Column="4" Style="{StaticResource TransparentEllipseButton}"
+                       Width="0" Tap="ShowPlanItemsLegendPanelButtonTap" >
+                    <ImageBrush ImageSource="/Assets/Icons/list.png" />
+                </Button>
+
+
+                <Line Name="mapFilterLine3" Grid.Column="5"
+                      X1="0" Y1="25" X2="0" Y2="25"
+			          Stroke="{Binding MainColor}" StrokeThickness="2"/>
+                <CheckBox Name="mapFilterCheckBox3" Grid.Column="6" Style="{StaticResource EllipseIconCheckBoxStyle}" 
+                          Height="0" IsChecked="{Binding IsRoutesVisible, Mode=TwoWay}" Tap="RoutesVisibilityCheckBoxTap">
+                    <ImageBrush ImageSource="/Assets/Icons/route.png"/>
+                </CheckBox>
+
+            </Grid>
+
+            <Grid Name="photosPanel" HorizontalAlignment="Right" Width="0" >
+                <Border Background="{Binding BackgroundColor}" Opacity="0.85"
+                        BorderBrush="{Binding MainColor}" BorderThickness="2,0,0,0"/>
+                <ListBox Name="photosListBox" ItemsSource="{Binding PushpinItems}" Opacity="0"
+                         ItemTemplate="{StaticResource TimeLineDataTemplate}"
+                         HorizontalAlignment="Right" Margin="5,2,2,2">
+                </ListBox>
+            </Grid>
+
+            <Grid Name="planItemsLegendPanel" HorizontalAlignment="Right" Width="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+               
+                <Border Grid.RowSpan="2" Background="{Binding BackgroundColor}" Opacity="0.85"
+                        BorderBrush="{Binding MainColor}" BorderThickness="2,0,0,0"/>
+
+                <TextBlock Text="schedule legend" Style="{StaticResource LargeTextStyle}" Margin="5" Foreground="{Binding TextColor}"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                
+                <ListBox Grid.Row="1" Name="planItemsLegendListBox" ItemsSource="{Binding PlanItemsLegend}" Opacity="0"
+                         ItemTemplate="{StaticResource PlanItemsLegendDataTemplate}"
+                         HorizontalAlignment="Center" Margin="5">
+                </ListBox>
+
+            </Grid>
+
+        </Grid>
+    </Border>
+</base:BasePhoneApplicationPage>

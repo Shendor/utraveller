@@ -1,0 +1,509 @@
+﻿<base:BasePhoneApplicationPage
+    x:Class="UTraveller.ImageViewer.Control.EventDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:appBar="clr-namespace:AppBarUtils;assembly=AppBarUtils"       
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:toolkitPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:live="clr-namespace:Microsoft.Live.Controls;assembly=Microsoft.Live.Controls"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=System.Windows"
+    xmlns:local="clr-namespace:UTraveller.EventDetails.Control"
+    xmlns:converter="clr-namespace:UTraveller.Common.Converter"
+    xmlns:base="clr-namespace:UTraveller.Common.Control"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+
+    <base:BasePhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/CheckBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
+
+            <DataTemplate x:Key="PhotoTilesTemplate">
+                <Image Width="110" Height="110" Margin="2" Stretch="UniformToFill" Source="{Binding DateItem.Thumbnail}"
+                       Tag="{Binding DateItem}" Tap="PhotoTap">
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="Show On Map"/>
+                            <toolkit:MenuItem Header="Delete" Command="{Binding DeletePhotoCommand}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                </Image>
+            </DataTemplate>
+
+            <DataTemplate x:Key="PhotoTimeLineItemTemplate">
+                <Grid Height="160" Margin="5,0,5,0" Tag="{Binding DateItem}" Tap="PhotoTap">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Ellipse Fill="{Binding BackgroundColor}" StrokeThickness="2" Stroke="{Binding MainColor}"
+                             Width="30" Height="30"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ShortFormattedDate}" Style="{StaticResource TimeLineTextStyle}"
+                               Foreground="{Binding TextColor}"/>
+
+                    <Grid Grid.Column="1" Grid.Row="1" Background="{Binding BackgroundColor}" 
+                          Height="100" VerticalAlignment="Top" Margin="0,5,15,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu>
+                                <toolkit:MenuItem Header="Delete" Command="{Binding DeleteTimeLineItemCommand}"/>
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+
+                        <Border Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="{Binding MainColor}"/>
+                        <Image Source="{Binding DateItem.Thumbnail}" Margin="2"/>
+                        <Grid Margin="2,0,0,2" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="18"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Margin="4" TextWrapping="Wrap" Style="{StaticResource SmallTextStyle}" 
+                                Text="{Binding DateItem.Description}" Foreground="{Binding TextColor}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MessageTimeLineItemTemplate">
+                <Grid Height="160" Margin="5,0,5,0" Tag="{Binding DateItem}" Tap="PhotoTap">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Ellipse Fill="{Binding BackgroundColor}" StrokeThickness="2" Stroke="{Binding MainColor}"
+                             Width="30" Height="30"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ShortFormattedDate}" Style="{StaticResource TimeLineTextStyle}"
+                               Foreground="{Binding TextColor}"/>
+
+                    <Grid Grid.Column="1" Grid.Row="1" Background="{Binding BackgroundColor}" 
+                          Height="100" VerticalAlignment="Top" Margin="0,5,15,0">
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu>
+                                <toolkit:MenuItem Header="Delete" Command="{Binding DeleteTimeLineItemCommand}"/>
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+                        <Border BorderThickness="2" BorderBrush="{Binding MainColor}"/>
+                        <Grid Margin="2,0,0,2" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="18"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Margin="4" TextWrapping="Wrap" Style="{StaticResource SmallTextStyle}"
+                                Text="{Binding DateItem.Text}" Foreground="{Binding TextColor}"/>
+
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TimeLineDataTemplate">
+                <local:EventDetailsTimeLineItemTemplateSelector Content="{Binding}" HorizontalContentAlignment="Stretch"
+                    local:EventDetailsTimeLineItemTemplateSelector.PhotoDataTemplate="{StaticResource PhotoTimeLineItemTemplate}"
+                    local:EventDetailsTimeLineItemTemplateSelector.MessageDataTemplate="{StaticResource MessageTimeLineItemTemplate}">
+                </local:EventDetailsTimeLineItemTemplateSelector>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GroupedPhotoTimeLineItemTemplate">
+                <Image Source="{Binding DateItem.Thumbnail}" Width="95" Height="95" Margin="3" 
+                       Tag="{Binding DateItem}" Tap="PhotoTap">
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="Delete" Command="{Binding DeleteTimeLineItemCommand}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                </Image>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GroupedMessageTimeLineItemTemplate">
+                <Border Width="90" Height="90" BorderBrush="{Binding MainColor}" BorderThickness="2" Margin="1"
+                        Tag="{Binding DateItem}" Tap="PhotoTap">
+                    <Border Background="{Binding MainColor}" Width="50" Height="50" Margin="3">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="/Assets/Icons/message3.png" />
+                        </Border.OpacityMask>
+                    </Border>
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="Delete" Command="{Binding DeleteTimeLineItemCommand}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GroupedTimeLineDataTemplateSelector">
+                <local:EventDetailsTimeLineItemTemplateSelector Content="{Binding}" HorizontalContentAlignment="Stretch"
+                    local:EventDetailsTimeLineItemTemplateSelector.PhotoDataTemplate="{StaticResource GroupedPhotoTimeLineItemTemplate}"
+                    local:EventDetailsTimeLineItemTemplateSelector.MessageDataTemplate="{StaticResource GroupedMessageTimeLineItemTemplate}">
+                </local:EventDetailsTimeLineItemTemplateSelector>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GroupedPhotoTemplate">
+                <Image Width="95" Height="95" Stretch="UniformToFill" 
+                       Source="{Binding DateItem.Thumbnail}" Margin="3">
+                </Image>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GroupHeader">
+                <Grid Height="80" Margin="-15,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Ellipse Fill="{Binding BackgroundColor}" StrokeThickness="2" Stroke="{Binding MainColor}"
+                             Width="30" Height="30"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Day}" Style="{StaticResource TimeLineTextStyle}"/>
+                </Grid>
+            </DataTemplate>
+
+            <Storyboard x:Name="toolbarStoryboard" SpeedRatio="2">
+                <DoubleAnimation x:Name="itemsViewButtonAnimation" Storyboard.TargetName="itemsViewButton" 
+                                 Storyboard.TargetProperty="Height" From="50" To="0" Duration="0:0:0.1"/>
+                <DoubleAnimation x:Name="mapLine2Animation" Storyboard.TargetName="mapLine2"
+                                 Storyboard.TargetProperty="X2" From="36" To="0" Duration="0:0:0.2"/>
+
+                <DoubleAnimation x:Name="mapButtonAnimation" Storyboard.TargetName="mapButton" 
+                                 Storyboard.TargetProperty="Height" From="50" To="0" Duration="0:0:0.1"/>
+                <DoubleAnimation x:Name="mapLineAnimation" Storyboard.TargetName="mapLine"
+                                 Storyboard.TargetProperty="X2" From="40" To="0" Duration="0:0:0.2"/>
+
+                <DoubleAnimation x:Name="timeLineItemLineAnimation1" Storyboard.TargetName="timeLineItemLine1" 
+                                 Storyboard.TargetProperty="X2" From="0" To="40" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="timeLineButtonLineAnimation1" Storyboard.TargetName="timeLineItemButton1"
+                                 Storyboard.TargetProperty="Height" From="0" To="50" Duration="0:0:0.1"/>
+
+                <DoubleAnimation x:Name="timeLineItemLineAnimation2" Storyboard.TargetName="timeLineItemLine2"
+                                 Storyboard.TargetProperty="X2" From="0" To="40" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="timeLineButtonLineAnimation2" Storyboard.TargetName="timeLineItemButton2"
+                                 Storyboard.TargetProperty="Height" From="0" To="50" Duration="0:0:0.1"/>
+
+                <DoubleAnimation x:Name="timeLineItemLineAnimation3" Storyboard.TargetName="timeLineItemLine3"
+                                 Storyboard.TargetProperty="X2" From="0" To="40" Duration="0:0:0.2"/>
+                <DoubleAnimation x:Name="timeLineButtonLineAnimation3" Storyboard.TargetName="timeLineItemButton3"
+                                 Storyboard.TargetProperty="Height" From="0" To="50" Duration="0:0:0.1"/>
+            </Storyboard>
+
+        </ResourceDictionary>
+    </base:BasePhoneApplicationPage.Resources>
+
+    <Grid Background="{Binding BackgroundColor}">
+
+        <phone:Panorama>
+            <phone:PanoramaItem Margin="-10,0,0,0" >
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="260"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Line Name="eventDashLine" Grid.Row="2" Grid.RowSpan="4" Stretch="UniformToFill"
+                          X1="0" Y1="0" X2="0" Y2="10" HorizontalAlignment="Center"
+			              Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                    <Ellipse Grid.Row="3" Stroke="{Binding MainColor}" Fill="{Binding BackgroundColor}" StrokeThickness="2" 
+                             Width="30" Height="30" VerticalAlignment="Top">
+                        <Ellipse.RenderTransform>
+                            <TranslateTransform x:Name="eventEllipseTranslate" Y="220"/>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+
+                    <Grid Grid.Row="4" Grid.Column="1" Opacity="1" Margin="-25,0,0,0"
+                            HorizontalAlignment="Left" VerticalAlignment="Center" Height="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Line Name="eventLine1" X1="0" Y1="25" X2="40" Y2="25" 
+                              Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                        <Button Name="eventButton1" Grid.Column="1" HorizontalAlignment="Left"
+                             Style="{StaticResource SmallEllipseButton}" Tap="BackButtonTap">
+                            <ImageBrush ImageSource="/Assets/Icons/back.png" />
+                        </Button>
+
+                        <Line Name="eventLine2" Grid.Column="2" X1="0" Y1="25" X2="40" Y2="25" 
+                              Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                        <Button Name="eventButton2" Grid.Column="3" HorizontalAlignment="Left"
+                             Style="{StaticResource SmallEllipseButton}" Command="{Binding BackupCommand}">
+                            <ImageBrush ImageSource="/Assets/Icons/upload.png" />
+                        </Button>
+                    </Grid>
+
+                    <Border Grid.ColumnSpan="2" Grid.RowSpan="2" BorderBrush="{Binding MainColor}"
+                            Background="{Binding BackgroundColor}" BorderThickness="2" Tap="EventImageTap"/>
+
+                    <Border Grid.Column="1" Width="60" Height="60"
+                            HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Opacity="0.3" Background="{Binding MainColor}" Tap="EventImageTap">
+                        <Border.OpacityMask>
+                            <ImageBrush ImageSource="/Assets/Images/hand.png"/>
+                        </Border.OpacityMask>
+                    </Border>
+
+                    <Image Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,2,2,2" 
+                           Source="{Binding EventImage}" Stretch="UniformToFill"
+                           HorizontalAlignment="Center" Tap="EventImageTap"/>
+
+                    <Button Grid.Row="1" Grid.RowSpan="2" Command="{Binding ShowTimeLineItemsCommand}"
+                          Style="{StaticResource EllipseButton}">
+                        <ImageBrush ImageSource="/Assets/Icons/image.png" />
+                    </Button>
+
+                    <Viewbox Grid.Row="2" Grid.RowSpan="2" Grid.Column="1"
+                     StretchDirection="DownOnly" Stretch="Uniform"
+                     HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <StackPanel>
+                            <TextBox FontSize="60" Text="{Binding Name, Mode=TwoWay}" Foreground="{Binding TextColor}"
+                               Style="{StaticResource TransparentTextBoxStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock FontSize="40" Text="{Binding PhotosQuantity}" HorizontalAlignment="Right"
+                                           Foreground="{Binding TextColor}"/>
+                            <TextBlock FontSize="30" Foreground="{Binding TextColor}"
+                               HorizontalAlignment="Right" Text="{Binding DateRange}" Tap="ChangeDateRangeTextBlockTap" />
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+            </phone:PanoramaItem>
+
+            <phone:PanoramaItem>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.RenderTransform>
+                        <TranslateTransform x:Name="eventBotomPanelTranslate" Y="0"/>
+                    </Grid.RenderTransform>
+
+                    <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="20"
+                                Visibility="{Binding HasNoTimeLineItems, Converter={StaticResource visibilityConverter}}">
+                        <Border Height="200" Width="200"
+                            Opacity="0.2" Background="{Binding MainColor}">
+                            <Border.OpacityMask>
+                                <ImageBrush ImageSource="/Assets/Images/photos.png"/>
+                            </Border.OpacityMask>
+                        </Border>
+                        <TextBlock Style="{StaticResource MiddleTextStyle}" HorizontalAlignment="Center"
+                                   TextWrapping="Wrap" Margin="10" Opacity="0.2" Foreground="{Binding TextColor}"
+                                   Text="This trip does not have any photos. You can add some using the toolbar above :)" />
+                    </StackPanel>
+
+
+                    <Line Grid.Row="2" Grid.RowSpan="2" 
+              X1="10" Y1="0" X2="10" Y2="200" Stretch="UniformToFill" HorizontalAlignment="Center"
+			  Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                    <!--<Border Grid.ColumnSpan="2" Background="{Binding MainColor}" />-->
+
+                    <Button Name="toolbarSwitchButton" Grid.Row="1" Style="{StaticResource EllipseButton}"
+                            Tap="ToolbarButtonTap">
+                        <ImageBrush ImageSource="/Assets/Icons/view.png" />
+                    </Button>
+
+                    <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Line Name="mapLine" 
+                              X1="0" Y1="40" X2="0" Y2="40" 
+			                  Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                        <Button Name="mapButton" Grid.Column="1" HorizontalAlignment="Left" Height="0"
+                                Style="{StaticResource SmallEllipseButton}" Command="{Binding ShowMapCommand}">
+                            <ImageBrush ImageSource="/Assets/Icons/map.png" />
+                        </Button>
+
+                        <Line Name="mapLine2" Grid.Column="2"
+                              X1="0" Y1="40" X2="0" Y2="40" 
+			                  Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                        <Button Name="itemsViewButton" Grid.Column="3" HorizontalAlignment="Left" Height="0"
+                                Style="{StaticResource SmallEllipseButton}" Tap="ItemsViewButtonTap">
+                            <ImageBrush x:Name="itemsViewImage" ImageSource="/Assets/Icons/grid.png" />
+                        </Button>
+                    </Grid>
+
+                    <Grid Name="timeLineItemTollbar" Grid.Row="1" Grid.Column="1" Opacity="1" 
+               HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Line Name="timeLineItemLine1" 
+                              X1="0" Y1="40" X2="40" Y2="40" 
+			                  Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                        <Button Name="timeLineItemButton1" Grid.Column="1" HorizontalAlignment="Left"
+                                 Style="{StaticResource SmallEllipseButton}" Command="{Binding AddPhotoCommand}">
+                            <ImageBrush ImageSource="/Assets/AppBar/add.png" />
+                        </Button>
+
+                        <Line Name="timeLineItemLine2" Grid.Column="2"
+                              X1="0" Y1="40" X2="40" Y2="40" 
+			                  Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                        <Button Name="timeLineItemButton2" Grid.Column="3" HorizontalAlignment="Left"
+                            Style="{StaticResource SmallEllipseButton}" Tap="CameraButtonTap">
+                            <ImageBrush ImageSource="/Assets/Icons/camera.png" />
+                        </Button>
+
+                        <Line Name="timeLineItemLine3" Grid.Column="4"
+                              X1="0" Y1="40" X2="40" Y2="40" 
+			                  Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                        <Button Name="timeLineItemButton3" Grid.Column="5" HorizontalAlignment="Left"
+                                Style="{StaticResource SmallEllipseButton}" Command="{Binding PostMessageCommand}">
+                            <ImageBrush ImageSource="/Assets/Icons/message3.png" />
+                        </Button>
+                    </Grid>
+
+
+                    <phone:LongListSelector Name="timeLineItemsPanel" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,15,0,0"
+                                                   ItemTemplate="{StaticResource TimeLineDataTemplate}" HorizontalContentAlignment="Stretch"
+                                                   ItemsSource="{Binding GroupedTimeLineItems}"
+                                                   LayoutMode="List" IsGroupingEnabled="True">
+
+                    </phone:LongListSelector>
+
+
+                    <phone:LongListSelector Name="groupedTimeLineItemsPanel" Visibility="Collapsed" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,15,0,0"
+                                                LayoutMode="List" IsGroupingEnabled="False"
+                                               ItemsSource="{Binding GroupedTimeLineItems}">
+
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5,0,5,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Ellipse Fill="{Binding BackgroundColor}" StrokeThickness="2" Stroke="{Binding MainColor}"
+                                                    Width="30" Height="30"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Day}" Style="{StaticResource TimeLineTextStyle}"
+                                               Foreground="{Binding TextColor}"/>
+
+                                    <phone:LongListSelector Grid.Column="1" Grid.Row="1" ItemsSource="{Binding}"
+                                                            ItemTemplate="{StaticResource GroupedTimeLineDataTemplateSelector}"
+                                                            LayoutMode="Grid" IsGroupingEnabled="False" GridCellSize="95, 95">
+                                    </phone:LongListSelector>
+                                </Grid>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                        <!--<toolkit:LongListMultiSelector.ItemContainerStyle>
+                            <Style TargetType="toolkit:LongListMultiSelectorItem">
+                                <Setter Property="CheckBoxMargin" Value="0"/>
+                                <Setter Property="Margin" Value="40,0,0,0" />
+                            </Style>
+                        </toolkit:LongListMultiSelector.ItemContainerStyle>-->
+                    </phone:LongListSelector>
+
+                </Grid>
+            </phone:PanoramaItem>
+
+            <phone:PanoramaItem>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Line Grid.Row="1" Grid.RowSpan="2" X1="10" Y1="0" X2="10" Y2="100" Stretch="UniformToFill" HorizontalAlignment="Center"
+			              Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                    <Button Style="{StaticResource EllipseButton}" Command="{Binding AddTripPlanItemCommand}">
+                        <ImageBrush ImageSource="/Assets/AppBar/add.png" />
+                    </Button>
+
+                    <Grid Grid.Column="1" HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Line X1="0" Y1="40" X2="40" Y2="40" Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                        <RadioButton Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource ImageRadioButton}"
+                               IsChecked="True" GroupName="tripDetails" Tap="ExpenseButtonTap">
+                            <ImageBrush ImageSource="/Assets/Icons/money.png" />
+                        </RadioButton>
+
+                        <Line Grid.Column="2" X1="0" Y1="40" X2="40" Y2="40" Stroke="{Binding MainColor}" StrokeThickness="2"/>
+
+                        <RadioButton Grid.Column="3" HorizontalAlignment="Left" Style="{StaticResource ImageRadioButton}"
+                                GroupName="tripDetails" Tap="PlanButtonTap">
+                            <ImageBrush ImageSource="/Assets/Icons/clock.png" />
+                        </RadioButton>
+                    </Grid>
+
+                    <local:MoneySpendingListControl Name="expenseControl" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding}" />
+
+                    <local:TripPlanControl Name="planControl" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding TripPlanViewModel}" Visibility="Collapsed"/>
+                </Grid>
+                
+            </phone:PanoramaItem>
+
+        </phone:Panorama>
+
+    </Grid>
+
+</base:BasePhoneApplicationPage>

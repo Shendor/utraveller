@@ -1,0 +1,72 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UTraveller.EventMap.PhotoPushpinDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:appBar="clr-namespace:AppBarUtils;assembly=AppBarUtils"       
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False" >
+
+    <phone:PhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="GroupHeader">
+            </DataTemplate>
+
+            <DataTemplate x:Key="PhotoTilesTemplate">
+                <Image Width="108" Height="108" Margin="4" Stretch="UniformToFill" Source="{Binding Photo.Thumbnail}">
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="Delete" Command="{Binding DeletePhotoCommand}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                </Image>
+            </DataTemplate>
+        </ResourceDictionary>
+
+    </phone:PhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+
+        <phone:Panorama Title="Pushpin">
+
+            <phone:PanoramaItem Header="about">
+                <Grid>
+                    
+                </Grid>
+            </phone:PanoramaItem>
+
+            <phone:PanoramaItem Header="photos">
+                <Grid>
+                    <phone:LongListSelector Margin="2"
+                                ItemsSource="{Binding PhotoThumbnails}"
+                                ItemTemplate="{StaticResource PhotoTilesTemplate}"                     
+                                IsGroupingEnabled="False"
+                                LayoutMode="Grid" 
+                                GridCellSize="108,108"/>
+                </Grid>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Photo"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/delete.png" Text="Delete Pushpin"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <i:Interaction.Behaviors>
+        <appBar:AppBarItemCommand Id="Add Photo" Command="{Binding AddPhotoCommand}"/>
+        <appBar:AppBarItemCommand Id="Delete Pushpin" Command="{Binding DeletePushpinCommand}"/>
+    </i:Interaction.Behaviors>
+
+</phone:PhoneApplicationPage>

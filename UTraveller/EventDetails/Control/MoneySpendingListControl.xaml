@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="UTraveller.EventDetails.Control.MoneySpendingListControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:converter="clr-namespace:UTraveller.Common.Converter"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Text.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right"
+                   Text="expenses" Margin="0,0,10,0" Foreground="{Binding TextColor}" Style="{StaticResource MiddleTextStyle}" />
+        
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="20" 
+                    Visibility="{Binding HasNoMoneySpendings, Converter={StaticResource visibilityConverter}}">
+            <Border Height="200" Width="200" Opacity="0.2" Background="{Binding MainColor}">
+                <Border.OpacityMask>
+                    <ImageBrush ImageSource="/Assets/Images/money_spendings.png"/>
+                </Border.OpacityMask>
+            </Border>
+            <TextBlock Style="{StaticResource MiddleTextStyle}" HorizontalAlignment="Center"
+                       TextWrapping="Wrap" Margin="30,10,30,10" Opacity="0.2" Foreground="{Binding TextColor}"
+                       Text="You don't have any expenses for this trip. You can add some using the button above :)" />
+        </StackPanel>
+        
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl HorizontalContentAlignment="Stretch"
+                     ItemsSource="{Binding GroupedMoneySpendings}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Ellipse Fill="{Binding BackgroundColor}" StrokeThickness="2" Stroke="{Binding MainColor}"
+                                     Width="30" Height="30"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Day}" Style="{StaticResource TimeLineTextStyle}"
+                                   Foreground="{Binding TextColor}"/>
+
+                            <ItemsControl Grid.Column="1" Grid.Row="1" ItemsSource="{Binding}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <toolkit:WrapPanel ItemWidth="95" ItemHeight="95"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="3" Tap="MoneySpendingItemTap" Tag="{Binding}"  Background="{Binding BackgroundColor}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+                                            <toolkit:ContextMenuService.ContextMenu>
+                                                <toolkit:ContextMenu>
+                                                    <toolkit:MenuItem Header="Delete" Command="{Binding DeleteTimeLineItemCommand}"/>
+                                                </toolkit:ContextMenu>
+                                            </toolkit:ContextMenuService.ContextMenu>
+                                            <Border Grid.RowSpan="2" BorderBrush="{Binding MainColor}" BorderThickness="2"  />
+                                            <Border Background="{Binding MainColor}" Width="40" Height="40">
+                                                <Border.OpacityMask>
+                                                    <ImageBrush ImageSource="{Binding Icon}" />
+                                                </Border.OpacityMask>
+                                            </Border>
+                                          
+                                            <TextBlock Grid.Row="2" Text="{Binding Amount}" HorizontalAlignment="Right" Margin="0,0,3,0"
+                                                       Style="{StaticResource SmallTextStyle}" Foreground="{Binding TextColor}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <StackPanel Grid.Row="2" Grid.Column="1" Opacity="0.7" HorizontalAlignment="Right">
+                                <TextBlock Text="{Binding Path=LocalizedResources.Common_Total, Source={StaticResource LocalizedStrings}}" 
+                                           Style="{StaticResource MiddleTextStyle}" Foreground="{Binding TextColor}" />
+                                <ItemsControl ItemsSource="{Binding Total}" Foreground="{Binding TextColor}">
+                                </ItemsControl>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+      
+    </Grid>
+</UserControl>

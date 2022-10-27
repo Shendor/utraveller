@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="ServiceImpl" Label="ServiceImpl" Category="Проект" />
+    <Node Id="ExifLib 1.5.0.0" Label="ExifLib 1.5.0.0" Category="Пакет" />
+    <Node Id="Facebook 6.8.0" Label="Facebook 6.8.0" Category="Пакет" />
+    <Node Id="Facebook.Client 0.9.1-alpha" Label="Facebook.Client 0.9.1-alpha" Category="Пакет" />
+    <Node Id="LiveSDK 5.5" Label="LiveSDK 5.5" Category="Пакет" />
+    <Node Id="Microsoft.Bcl 1.1.9" Label="Microsoft.Bcl 1.1.9" Category="Пакет" />
+    <Node Id="Microsoft.Bcl.Async 1.0.168" Label="Microsoft.Bcl.Async 1.0.168" Category="Пакет" />
+    <Node Id="Microsoft.Bcl.Build 1.0.14" Label="Microsoft.Bcl.Build 1.0.14" Category="Пакет" />
+    <Node Id="Microsoft.Net.Http 2.2.28" Label="Microsoft.Net.Http 2.2.28" Category="Пакет" />
+    <Node Id="Newtonsoft.Json 6.0.4" Label="Newtonsoft.Json 6.0.4" Category="Пакет" />
+    <Node Id="NokiaImagingSDK 1.2.99" Label="NokiaImagingSDK 1.2.99" Category="Пакет" />
+    <Node Id="SharpKml.Core 2.0.0" Label="SharpKml.Core 2.0.0" Category="Пакет" />
+    <Node Id="SharpZipLib.Portable 0.86.0.0001" Label="SharpZipLib.Portable 0.86.0.0001" Category="Пакет" />
+    <Node Id="ServiceApi" Label="ServiceApi" Category="Проект" />
+    <Node Id="SharpKml.Core 2.0.0" Label="SharpKml.Core 2.0.0" Category="Пакет" />
+    <Node Id="UTravellerModel" Label="UTravellerModel" Category="Проект" />
+    <Node Id="Newtonsoft.Json 6.0.3" Label="Newtonsoft.Json 6.0.3" Category="Пакет" />
+    <Node Id="UTraveller" Label="UTraveller" Category="Проект" />
+    <Node Id="AppBarUtils 2.4" Label="AppBarUtils 2.4" Category="Пакет" />
+    <Node Id="Coding4Fun.Toolkit.Controls 2.0.7" Label="Coding4Fun.Toolkit.Controls 2.0.7" Category="Пакет" />
+    <Node Id="LiveSDK 5.5" Label="LiveSDK 5.5" Category="Пакет" />
+    <Node Id="MvvmLight 4.2.30.0" Label="MvvmLight 4.2.30.0" Category="Пакет" />
+    <Node Id="MvvmLightLibs 4.2.30.0" Label="MvvmLightLibs 4.2.30.0" Category="Пакет" />
+    <Node Id="Ninject 3.0.1.10" Label="Ninject 3.0.1.10" Category="Пакет" />
+    <Node Id="NokiaImagingSDK 1.2.99" Label="NokiaImagingSDK 1.2.99" Category="Пакет" />
+    <Node Id="ShWp 1.0.1" Label="ShWp 1.0.1" Category="Пакет" />
+    <Node Id="WPtoolkit.Kinnara 4.2014.06.10" Label="WPtoolkit.Kinnara 4.2014.06.10" Category="Пакет" />
+  </Nodes>
+  <Links>
+    <Link Source="Facebook.Client 0.9.1-alpha" Target="Facebook 6.8.0" Category="Зависимость пакета" />
+    <Link Source="Facebook.Client 0.9.1-alpha" Target="Facebook 6.8.0" Category="Зависимость пакета" />
+    <Link Source="Facebook.Client 0.9.1-alpha" Target="Microsoft.Bcl.Async 1.0.168" Category="Зависимость пакета" />
+    <Link Source="LiveSDK 5.5" Target="Microsoft.Bcl 1.1.9" Category="Зависимость пакета" />
+    <Link Source="LiveSDK 5.5" Target="Microsoft.Bcl.Async 1.0.168" Category="Зависимость пакета" />
+    <Link Source="Microsoft.Bcl 1.1.9" Target="Microsoft.Bcl.Build 1.0.14" Category="Зависимость пакета" />
+    <Link Source="Microsoft.Bcl.Async 1.0.168" Target="Microsoft.Bcl 1.1.9" Category="Зависимость пакета" />
+    <Link Source="Microsoft.Net.Http 2.2.28" Target="Microsoft.Bcl 1.1.9" Category="Зависимость пакета" />
+    <Link Source="Microsoft.Net.Http 2.2.28" Target="Microsoft.Bcl.Build 1.0.14" Category="Зависимость пакета" />
+    <Link Source="ServiceImpl" Target="ExifLib 1.5.0.0" Category="Установленный пакет" />
+    <Link Source="ServiceImpl" Target="Facebook.Client 0.9.1-alpha" Category="Установленный пакет" />
+    <Link Source="ServiceImpl" Target="LiveSDK 5.5" Category="Установленный пакет" />
+    <Link Source="ServiceImpl" Target="Microsoft.Net.Http 2.2.28" Category="Установленный пакет" />
+    <Link Source="ServiceImpl" Target="Newtonsoft.Json 6.0.4" Category="Установленный пакет" />
+    <Link Source="ServiceImpl" Target="NokiaImagingSDK 1.2.99" Category="Установленный пакет" />
+    <Link Source="ServiceImpl" Target="SharpKml.Core 2.0.0" Category="Установленный пакет" />
+    <Link Source="ServiceImpl" Target="SharpZipLib.Portable 0.86.0.0001" Category="Установленный пакет" />
+    <Link Source="ServiceApi" Target="SharpKml.Core 2.0.0" Category="Установленный пакет" />
+    <Link Source="UTravellerModel" Target="Newtonsoft.Json 6.0.3" Category="Установленный пакет" />
+    <Link Source="MvvmLight 4.2.30.0" Target="MvvmLightLibs 4.2.30.0" Category="Зависимость пакета" />
+    <Link Source="MvvmLight 4.2.30.0" Target="MvvmLightLibs 4.2.30.0" Category="Зависимость пакета" />
+    <Link Source="MvvmLight 4.2.30.0" Target="MvvmLightLibs 4.2.30.0" Category="Зависимость пакета" />
+    <Link Source="MvvmLight 4.2.30.0" Target="MvvmLightLibs 4.2.30.0" Category="Зависимость пакета" />
+    <Link Source="MvvmLight 4.2.30.0" Target="MvvmLightLibs 4.2.30.0" Category="Зависимость пакета" />
+    <Link Source="MvvmLight 4.2.30.0" Target="MvvmLightLibs 4.2.30.0" Category="Зависимость пакета" />
+    <Link Source="MvvmLight 4.2.30.0" Target="MvvmLightLibs 4.2.30.0" Category="Зависимость пакета" />
+    <Link Source="MvvmLight 4.2.30.0" Target="MvvmLightLibs 4.2.30.0" Category="Зависимость пакета" />
+    <Link Source="UTraveller" Target="AppBarUtils 2.4" Category="Установленный пакет" />
+    <Link Source="UTraveller" Target="Coding4Fun.Toolkit.Controls 2.0.7" Category="Установленный пакет" />
+    <Link Source="UTraveller" Target="LiveSDK 5.5" Category="Установленный пакет" />
+    <Link Source="UTraveller" Target="MvvmLight 4.2.30.0" Category="Установленный пакет" />
+    <Link Source="UTraveller" Target="Ninject 3.0.1.10" Category="Установленный пакет" />
+    <Link Source="UTraveller" Target="NokiaImagingSDK 1.2.99" Category="Установленный пакет" />
+    <Link Source="UTraveller" Target="ShWp 1.0.1" Category="Установленный пакет" />
+    <Link Source="UTraveller" Target="WPtoolkit.Kinnara 4.2014.06.10" Category="Установленный пакет" />
+  </Links>
+  <Categories>
+    <Category Id="Проект" />
+    <Category Id="Пакет" />
+  </Categories>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Проект" ValueLabel="True">
+      <Condition Expression="HasCategory('Проект')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Зависимость пакета" ValueLabel="True">
+      <Condition Expression="HasCategory('Зависимость пакета')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>

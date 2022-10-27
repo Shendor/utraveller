@@ -1,0 +1,78 @@
+﻿<base:BasePhoneApplicationPage
+    x:Class="UTraveller.PhotoCrop.PhotoCropPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:appBar="clr-namespace:AppBarUtils;assembly=AppBarUtils" 
+    xmlns:base="clr-namespace:UTraveller.Common.Control"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+    <base:BasePhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UTraveller;component/Assets/Styles/Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </base:BasePhoneApplicationPage.Resources>
+    
+    <Grid Background="{Binding BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="ContentPanel" Grid.RowSpan="2">
+            <ViewportControl x:Name="Viewport" SizeChanged="Viewport_SizeChanged"
+                   ManipulationStarted="Viewport_ManipulationStarted"
+                   ManipulationDelta="Viewport_ManipulationDelta"
+                   ManipulationCompleted="Viewport_ManipulationCompleted"
+                   ManipulationStateChanged="Viewport_ManipulationStateChanged">
+                <Image x:Name="Image" Source="{Binding Photo}" Stretch="Uniform" CacheMode="BitmapCache"/>
+            </ViewportControl>
+
+            <Grid IsHitTestVisible="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--<Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="Black" Opacity="0.0"/>
+                <Rectangle Grid.Row="1" Grid.Column="0" Fill="Black" Opacity="0.0"/>
+                <Rectangle Grid.Row="1" Grid.Column="2" Fill="Black" Opacity="0.0"/>
+                <Rectangle Grid.Row="2" Grid.ColumnSpan="3" Fill="Black" Opacity="0.0"/>-->
+
+                <Border x:Name="Crop" Grid.Row="1" Grid.Column="1" Background="Black" Opacity="0.5"
+                        Width="{Binding CropWidth}" Height="{Binding CropHeight}"
+                        BorderBrush="White" BorderThickness="2"/>
+            </Grid>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Style="{StaticResource SmallEllipseButton}" HorizontalAlignment="Left"
+                   Tap="ApplyCropButtonClick">
+                <ImageBrush ImageSource="/Assets/AppBar/check.png" />
+            </Button>
+
+            <Button Style="{StaticResource SmallEllipseButton}" HorizontalAlignment="Right"
+                Tap="CloseButtonClick" Margin="15,0,0,0">
+                <ImageBrush ImageSource="/Assets/AppBar/close.png" />
+            </Button>
+        </StackPanel>
+        
+    </Grid>
+
+</base:BasePhoneApplicationPage>
